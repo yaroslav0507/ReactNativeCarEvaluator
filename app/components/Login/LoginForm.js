@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TextInput, TouchableOpacity, Text } from 'react-native';
+import { Navigator, StyleSheet, View, TextInput, TouchableOpacity, Text } from 'react-native';
 
 export class LoginForm extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  login() {
+    this.props.navigator.push({
+      name: 'transportPicker'
+    })
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -23,7 +33,9 @@ export class LoginForm extends Component {
                    ref={(input) => this.passwordInput = input}
         />
 
-        <TouchableOpacity style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={() => this.login()}>
           <Text style={styles.buttonText}>ВХОД</Text>
         </TouchableOpacity>
       </View>

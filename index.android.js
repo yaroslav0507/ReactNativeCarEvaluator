@@ -1,4 +1,5 @@
 import { AppRegistry } from 'react-native';
-import { Root } from './app/components/Root';
+import { Root } from './app/setup';
+const setup = require('./app/setup');
 
-AppRegistry.registerComponent('ReactNativeCarEvaluator', () => Root);
+AppRegistry.registerComponent('ReactNativeCarEvaluator', setup);

@@ -6,6 +6,8 @@ const transport = (state = [], action) => {
         name: action.name,
         value: action.value
       };
+    default:
+      return state;
   }
 };
 
@@ -15,7 +17,9 @@ const transports = (state = [], action) => {
       return [
         ...state,
         transport(undefined, action)
-      ]
+      ];
+    default:
+      return state;
   }
 };
 
