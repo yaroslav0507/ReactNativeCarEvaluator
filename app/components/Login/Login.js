@@ -44,10 +44,10 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#FFF',
-    width: 250,
     textAlign: 'center',
-    marginTop: 5,
-    opacity: .7
+    marginTop: 25,
+    opacity: .7,
+    width: 250
   },
   formContainer: {
     flexGrow: 1,
