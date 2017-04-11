@@ -13,23 +13,8 @@ class TransportFilter extends Component {
 		}
 	}
 
-	onBodyStyleSelected(selectedBodyStyle) {
-		this.setState({
-			bodyStyle: selectedBodyStyle.value
-		})
-	}
-
 	render() {
-	  const { onTransportTypeSelected, transportFilters } = this.props;
-		const renderBodyTypePicker = (transportType) => {
-			if (transportType) {
-				return <TypePicker
-          apiURL={`/categories/${transportType}/bodystyles`}
-          onValueSelected={(selectedTransportType) => this.onBodyStyleSelected(selectedTransportType)}/>
-			} else {
-				return null;
-			}
-		};
+	  const { onTransportTypeSelected, onBodyStyleSelected, transportFilters } = this.props;
 
 		return (
       <View style={styles.container}>
@@ -39,7 +24,10 @@ class TransportFilter extends Component {
           apiURL="/categories"
           onItemSelected={(selectedTransportType) => onTransportTypeSelected(selectedTransportType)}/>
 
-				{ renderBodyTypePicker(transportFilters.transportType) }
+				<TypePicker
+					apiURL={`/categories/${transportFilters.transportType.id}/bodystyles`}
+					onItemSelected={(selectedTransportType) => onBodyStyleSelected(selectedTransportType)}/>
+
 
         <TouchableOpacity
           opPress={() => this.onSubmit()}
@@ -47,6 +35,7 @@ class TransportFilter extends Component {
           <Text style={styles.buttonText}>Submit</Text>
         </TouchableOpacity>
         <Text>{transportFilters.transportType.name}</Text>
+        <Text>{transportFilters.bodyStyle && transportFilters.bodyStyle.name}</Text>
       </View>
 		)
 	}

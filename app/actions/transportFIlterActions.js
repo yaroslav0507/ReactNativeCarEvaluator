@@ -1,0 +1,2 @@
+export const ADD_TRANSPORT_TYPE = 'ADD_TRANSPORT_TYPE';
+export const ADD_BODY_STYLE = 'ADD_BODY_STYLE';

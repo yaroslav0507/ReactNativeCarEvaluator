@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
   return {
-    selectedVehicleModel: state.selectedVehicleModel
+    appliedVehicleFilters: state.appliedVehicleFilters
   }
 };
 

@@ -6,20 +6,26 @@ export class TypePicker extends Component {
     super(props);
     this.state = {
       fetchedData: null,
+			selectedValue: 'Select',
       loaded: false
     }
   }
-  componentDidMount(){
-    this.fetchData()
+  componentDidMount() {
+    this.fetchData();
+  }
+
+	componentDidUpdate(nextProps, nextState) {
+    if (nextProps.apiURL !== this.props.apiURL) {
+      this.fetchData();
+    }
   }
 
   fetchData(){
-    fetch(`http://api.auto.ria.com${this.props.apiURL}`)
+    this.props.apiURL && fetch(`http://api.auto.ria.com${this.props.apiURL}`)
       .then(response => response.json())
       .then(responseData => {
         this.setState({
           fetchedData: responseData,
-					selectedValue: null,
           loaded: true
         })
       })
@@ -46,7 +52,7 @@ export class TypePicker extends Component {
         style={styles.picker}
         selectedValue={this.state.selectedValue}
         onValueChange={(selectedValue) => this.onValueChange(selectedValue)}>
-        {this.state.fetchedData.map((type, i) => (
+        {this.state.fetchedData && this.state.fetchedData.map((type, i) => (
           <Picker.Item key={i} label={type.name} value={type.value}/>
         ))}
       </Picker>
