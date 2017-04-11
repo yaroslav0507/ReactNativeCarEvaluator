@@ -8,7 +8,7 @@ export class LoginForm extends Component {
 
   login() {
     this.props.navigator.push({
-      name: 'transportPicker'
+      name: 'transportFilter'
     })
   }
 
@@ -29,6 +29,7 @@ export class LoginForm extends Component {
                    returnKeyType='go'
                    secureTextEntry
                    placeholderTextColor='rgba(255, 255, 255, .5)'
+                   underlineColorAndroid={'transparent'}
                    style={styles.input}
                    ref={(input) => this.passwordInput = input}
         />
