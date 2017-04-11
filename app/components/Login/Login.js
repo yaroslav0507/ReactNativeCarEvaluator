@@ -25,7 +25,7 @@ export class Login extends Component {
   }
 }
 
-const PRIMARY_COLOR = 'rgba(52, 152, 219, 1.0)';
+const PRIMARY_COLOR = '#3498db';
 
 const styles = StyleSheet.create({
   container: {

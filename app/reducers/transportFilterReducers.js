@@ -20,7 +20,8 @@ const transportFilters = (state = {}, action) => {
   switch (action.type) {
     case ADD_TRANSPORT_TYPE:
       return Object.assign({}, state, {
-        transportType: transportFilter(undefined, action)
+        transportType: transportFilter(undefined, action),
+				bodyStyle: null
       });
 		case ADD_BODY_STYLE:
       return Object.assign({}, state, {

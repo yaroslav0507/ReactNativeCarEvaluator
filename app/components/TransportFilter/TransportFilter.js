@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-const { Navigator, StyleSheet, View, Text, Picker, TouchableOpacity } = require('react-native');
+const {  StyleSheet, View, Text, Picker, StatusBar, TouchableOpacity } = require('react-native');
 
 import { TypePicker } from '../TypePicker';
+import { globalStyles } from '../styles/variables';
+import { OptionPicker } from '../OptionPicker';
 
 class TransportFilter extends Component {
 	constructor(props) {
@@ -9,8 +11,26 @@ class TransportFilter extends Component {
 		this.dispatch = props.dispatch;
 		this.state = {
 			transportType: null,
-			bodyStyle: null
+			bodyStyle: null,
+			averagePrice: null,
 		}
+	}
+
+	getAveragePrice() {
+		const { transportType, bodyStyle } = this.props.transportFilters;
+		fetch(`http://api.auto.ria.com/average?main_category=${transportType.id}&body_id=${bodyStyle.id}`)
+			.then(response => response.json())
+			.then(responseData => {
+
+				const { arithmeticMean, message } = responseData;
+				arithmeticMean && this.setState({
+					averagePrice: Math.round(arithmeticMean)
+				});
+
+				message && this.setState({
+					averagePrice: message
+				});
+			})
 	}
 
 	render() {
@@ -18,24 +38,39 @@ class TransportFilter extends Component {
 
 		return (
       <View style={styles.container}>
-        <Text>Выберите тип транспорта</Text>
+				<StatusBar barStyle="light-content"/>
+        <Text style={styles.title}>Выберите тип транспорта</Text>
 
-        <TypePicker
-          apiURL="/categories"
-          onItemSelected={(selectedTransportType) => onTransportTypeSelected(selectedTransportType)}/>
+				<OptionPicker
+					iconName="ios-car-outline"
+					iconColor="#3498db"
+					title="Вид транспорта"
+					value={transportFilters.transportType.name}
+					apiURL="/categories"
+					onItemSelected={(selectedItem) => onTransportTypeSelected(selectedItem)}/>
 
-				<TypePicker
+				<OptionPicker
+					iconName="ios-construct-outline"
+					iconColor="#2ecc71"
+					title="Тип кузова"
+					value={transportFilters.bodyStyle && transportFilters.bodyStyle.name}
 					apiURL={`/categories/${transportFilters.transportType.id}/bodystyles`}
-					onItemSelected={(selectedTransportType) => onBodyStyleSelected(selectedTransportType)}/>
+					onItemSelected={(selectedItem) => onBodyStyleSelected(selectedItem)}/>
+
+				<View >
+					<TouchableOpacity
+						onPress={() => this.getAveragePrice()}
+						style={styles.button}>
+						<Text style={styles.buttonText}>Узнать среднюю строимость</Text>
+					</TouchableOpacity>
+				</View>
 
 
-        <TouchableOpacity
-          opPress={() => this.onSubmit()}
-          style={styles.button}>
-          <Text style={styles.buttonText}>Submit</Text>
-        </TouchableOpacity>
-        <Text>{transportFilters.transportType.name}</Text>
-        <Text>{transportFilters.bodyStyle && transportFilters.bodyStyle.name}</Text>
+				<View style={styles.averagePriceContainer}>
+					<Text style={styles.averagePriceValue}>
+						{this.state.averagePrice && '$'} {this.state.averagePrice}
+					</Text>
+				</View>
       </View>
 		)
 	}
@@ -47,18 +82,33 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 15,
-    backgroundColor: 'rgba(236, 240, 241, 1.0)'
+    backgroundColor: globalStyles.colors.greyXXL,
   },
+	title: {
+  	paddingVertical: 20,
+		fontSize: 16,
+		textAlign: 'center',
+		color: '#FFF'
+	},
   button: {
-    backgroundColor: '#f1c40f',
-    paddingVertical: 10,
-    marginTop: 15
+    backgroundColor: '#27ae60',
+    padding: 15,
+		borderRadius: 50
   },
   buttonText: {
     textAlign: 'center',
     color: '#FFF',
     fontWeight: '700'
-  }
+  },
+	averagePriceContainer: {
+  	flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	averagePriceValue: {
+  	fontSize: 40,
+		color: '#bdc3c7'
+	}
 });
 
 

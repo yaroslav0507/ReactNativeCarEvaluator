@@ -6,7 +6,7 @@ export class TypePicker extends Component {
     super(props);
     this.state = {
       fetchedData: null,
-			selectedValue: 'Select',
+			selectedValue: null,
       loaded: false
     }
   }
@@ -21,11 +21,15 @@ export class TypePicker extends Component {
   }
 
   fetchData(){
+    const ANY_TYPE = { name: 'Любой', value: 0 };
+
     this.props.apiURL && fetch(`http://api.auto.ria.com${this.props.apiURL}`)
       .then(response => response.json())
       .then(responseData => {
+        responseData.unshift(ANY_TYPE);
         this.setState({
           fetchedData: responseData,
+					selectedValue: responseData[0],
           loaded: true
         })
       })

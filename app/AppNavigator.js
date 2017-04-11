@@ -83,7 +83,7 @@ export class AppNavigator extends Component {
           }
         }}
         initialRoute={{
-          name: 'login'
+          name: 'transportFilter'
         }}
         renderScene={this.renderScene}
       />
