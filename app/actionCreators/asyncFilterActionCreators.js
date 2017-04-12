@@ -1,12 +1,12 @@
 import { REQUEST_TRANSPORT_TYPES, RECEIVE_TRANSPORT_TYPES} from '../actions/asyncFilterActions';
 
-export const requestTransportTypes = () => {
+export const requestCategories = () => {
 	return {
 		type: REQUEST_TRANSPORT_TYPES
 	}
 };
 
-export const receiveTransportTypes = (json) => {
+export const receiveCategories = (json) => {
 	return {
 		type: RECEIVE_TRANSPORT_TYPES,
 		items: json,
@@ -14,14 +14,14 @@ export const receiveTransportTypes = (json) => {
 	}
 };
 
-export const fetchTransportTypes = () => {
+export const fetchCategories = () => {
 	return (dispatch) => {
-		dispatch(requestTransportTypes());
+		dispatch(requestCategories());
 
 		return fetch(`http://api.auto.ria.com/categories`)
 			.then(response => response.json())
 			.then(json => {
-				dispatch(receiveTransportTypes(json));
+				dispatch(receiveCategories(json));
 			})
 	}
 };

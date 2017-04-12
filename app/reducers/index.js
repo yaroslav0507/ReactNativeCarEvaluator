@@ -1,8 +1,11 @@
 const { combineReducers } = require('redux');
 
-import { transportTypes, transportFilters } from './transportFilterReducers';
+import { filters } from './filterReducers';
+import { categories } from './categoryReducers';
 
 export default combineReducers({
-	transportTypes,
-	transportFilters
+	data: combineReducers({
+		categories
+	}),
+	filters
 })

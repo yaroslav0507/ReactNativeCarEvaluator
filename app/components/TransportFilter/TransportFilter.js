@@ -10,7 +10,7 @@ class TransportFilter extends Component {
 		super(props);
 		this.dispatch = props.dispatch;
 		this.state = {
-			transportType: null,
+			category: null,
 			bodyStyle: null,
 			averagePrice: null,
 		}
@@ -21,8 +21,8 @@ class TransportFilter extends Component {
 	}
 
 	getAveragePrice() {
-		const { transportType, bodyStyle } = this.props.transportFilters;
-		fetch(`http://api.auto.ria.com/average?main_category=${transportType.id}&body_id=${bodyStyle.id}`)
+		const { category, bodyStyle } = this.props.filters;
+		fetch(`http://api.auto.ria.com/average?main_category=${category.id}&body_id=${bodyStyle.id}`)
 			.then(response => response.json())
 			.then(responseData => {
 
@@ -39,11 +39,11 @@ class TransportFilter extends Component {
 
 	render() {
 	  const {
-	  	onTransportTypeSelected,
+	  	onCategorySelected,
 			onBodyStyleSelected,
-			transportTypes,
-			transportFilters: {
-	  		transportType,
+			categories,
+			filters: {
+	  		category,
 				bodyStyle
 	  	}
 	  } = this.props;
@@ -57,16 +57,16 @@ class TransportFilter extends Component {
 					iconName="ios-car-outline"
 					iconColor="#3498db"
 					title="Вид транспорта"
-					value={transportType && transportType.name}
-					list={transportTypes.items}
-					onItemSelected={(selectedItem) => onTransportTypeSelected(selectedItem)}/>
+					value={category && category.name}
+					list={categories.items}
+					onItemSelected={(selectedItem) => onCategorySelected(selectedItem)}/>
 
 				<OptionPicker
 					iconName="ios-construct-outline"
 					iconColor="#2ecc71"
 					title="Тип кузова"
 					value={bodyStyle && bodyStyle.name}
-					apiURL={`/categories/${transportType && transportType.id}/bodystyles`}
+					apiURL={`/categories/${category && category.id}/bodystyles`}
 					onItemSelected={(selectedItem) => onBodyStyleSelected(selectedItem)}/>
 
 				<View >

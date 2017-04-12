@@ -60,7 +60,7 @@ export class AppNavigator extends Component {
         <Login navigator={navigator} {...route.passProps}/>
       );
     }
-    if (route.name === 'transportFilter') {
+    if (route.name === 'filter') {
       return (
         <TransportFilterContainer navigator={navigator} {...route.passProps}/>
       );
@@ -83,7 +83,7 @@ export class AppNavigator extends Component {
           }
         }}
         initialRoute={{
-          name: 'transportFilter'
+          name: 'filter'
         }}
         renderScene={this.renderScene}
       />

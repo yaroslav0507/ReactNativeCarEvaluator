@@ -8,7 +8,7 @@ export class LoginForm extends Component {
 
   login() {
     this.props.navigator.push({
-      name: 'transportFilter'
+      name: 'filter'
     })
   }
 

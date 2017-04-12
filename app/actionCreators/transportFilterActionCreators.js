@@ -3,10 +3,10 @@ import {
 	SELECT_BODY_STYLE
 } from '../actions/transportFilterActions';
 
-export const selectTransportType = (transportType) => {
+export const selectCategory = (category) => {
 	return {
     type: SELECT_TRANSPORT_TYPE,
-		transportType
+		category
   }
 };
 
