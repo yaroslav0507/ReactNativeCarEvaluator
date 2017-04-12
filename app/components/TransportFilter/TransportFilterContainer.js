@@ -1,20 +1,25 @@
 import { TransportFilter } from './TransportFilter';
 import { connect } from 'react-redux';
-import { addTransportType, addBoyStyle } from '../../actionCreators/transportFilterActionCreators';
+import { selectTransportType, selectBodyStyle } from '../../actionCreators/transportFilterActionCreators';
+import { fetchTransportTypes } from '../../actionCreators/asyncFilterActionCreators';
 
 const mapStateToProps = (state) => {
   return {
+		transportTypes: state.transportTypes,
 		transportFilters: state.transportFilters
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-		onTransportTypeSelected: ({ name, value }) => {
-			dispatch(addTransportType(name, value))
+  	onViewLoaded: () => {
+  		dispatch(fetchTransportTypes())
+		},
+		onTransportTypeSelected: (transportType) => {
+			dispatch(selectTransportType(transportType))
     },
-		onBodyStyleSelected: ({ name, value }) => {
-		  dispatch(addBoyStyle(name, value))
+		onBodyStyleSelected: (bodyStyle) => {
+		  dispatch(selectBodyStyle(bodyStyle))
     }
   }
 };

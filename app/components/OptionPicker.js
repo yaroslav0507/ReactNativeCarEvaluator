@@ -4,7 +4,6 @@ import { TypePicker } from './TypePicker';
 import { globalStyles } from './styles/variables';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-
 export class OptionPicker extends Component {
 	constructor(props) {
 		super(props);
@@ -17,8 +16,15 @@ export class OptionPicker extends Component {
 		this.setState({modalVisible: visible});
 	}
 
+	onItemSelected(selectedItem) {
+		this.props.onItemSelected(selectedItem);
+		this.setState({
+			selectedItem
+		});
+	}
+
   render() {
-		const { apiURL, onItemSelected } = this.props;
+		const { list } = this.props;
 
 		return (
     	<View style={styles.container}>
@@ -39,7 +45,7 @@ export class OptionPicker extends Component {
 					visible={this.state.modalVisible}
 					onRequestClose={() => {alert("Modal has been closed.")}}>
 					<View style={styles.modal}>
-						<TypePicker apiURL={apiURL} onItemSelected={onItemSelected}/>
+						<TypePicker list={list} onItemSelected={(selectedItem) => this.onItemSelected(selectedItem)}/>
 
 						<TouchableHighlight
 							onPress={() => { this.setModalVisible(!this.state.modalVisible)}}

@@ -1,20 +1,18 @@
 import {
-	ADD_TRANSPORT_TYPE,
-	ADD_BODY_STYLE
-} from '../actions/transportFIlterActions';
+	SELECT_TRANSPORT_TYPE,
+	SELECT_BODY_STYLE
+} from '../actions/transportFilterActions';
 
-export const addTransportType = (name, value) => {
+export const selectTransportType = (transportType) => {
 	return {
-    type: ADD_TRANSPORT_TYPE,
-    name,
-		value
+    type: SELECT_TRANSPORT_TYPE,
+		transportType
   }
 };
 
-export const addBoyStyle = (name, value) => {
+export const selectBodyStyle = (bodyStyle) => {
 	return {
-    type: ADD_BODY_STYLE,
-    name,
-		value
+    type: SELECT_BODY_STYLE,
+		bodyStyle
   }
 };
