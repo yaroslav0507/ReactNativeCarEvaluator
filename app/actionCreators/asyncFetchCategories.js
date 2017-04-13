@@ -25,3 +25,23 @@ export const fetchCategories = () => {
 			})
 	}
 };
+
+export const shouldFetchCategories = (state) => {
+	const categories = state.data.categories;
+
+	if (!categories.items.length) {
+		return true
+	} else if (categories.isFetching) {
+		return false;
+	}
+};
+
+export const fetchCategoriesIfNeeded = () => {
+	return (dispatch, getState) => {
+		if (shouldFetchCategories(getState())) {
+			return dispatch(fetchCategories());
+		} else {
+			Promise.resolve();
+		}
+	}
+};
