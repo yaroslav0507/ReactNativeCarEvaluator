@@ -3,7 +3,7 @@ const {  StyleSheet, View, Text, Picker, StatusBar, TouchableOpacity } = require
 
 import { TypePicker } from '../TypePicker';
 import { globalStyles } from '../styles/variables';
-import { OptionPicker } from '../OptionPicker';
+import { OptionPicker } from '../OptionPicker/OptionPicker';
 
 class TransportFilter extends Component {
 	constructor(props) {
@@ -59,6 +59,7 @@ class TransportFilter extends Component {
 					title="Вид транспорта"
 					value={category && category.name}
 					list={categories.items}
+					selectedItem={category.value}
 					onItemSelected={(selectedItem) => onCategorySelected(selectedItem)}/>
 
 				<OptionPicker
@@ -66,7 +67,8 @@ class TransportFilter extends Component {
 					iconColor="#2ecc71"
 					title="Тип кузова"
 					value={bodyStyle && bodyStyle.name}
-					apiURL={`/categories/${category && category.id}/bodystyles`}
+					list={categories.items}
+					selectedItem={category.value}
 					onItemSelected={(selectedItem) => onBodyStyleSelected(selectedItem)}/>
 
 				<View >
