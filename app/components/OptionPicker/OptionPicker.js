@@ -26,6 +26,11 @@ export class OptionPicker extends Component {
 		this.setModalVisible(false);
 	}
 
+	clearSelection() {
+
+		this.setModalVisible(false);
+	}
+
 	renderOptionsListRow(rowData) {
 		const isActive = rowData.value === this.props.selectedItem;
 		const iconName = isActive ? 'ios-checkmark-circle-outline' : 'ios-radio-button-off';
@@ -75,6 +80,13 @@ export class OptionPicker extends Component {
 										color="#FFF"/>
 						</TouchableOpacity>
 						<Text style={styles.title}>{this.props.title}</Text>
+						<TouchableOpacity
+							onPress={() => {this.clearSelection()}}
+							style={styles.close}>
+							<Icon name="ios-arrow-back"
+										size={25}
+										color="#FFF"/>
+						</TouchableOpacity>
 					</View>
 
 					<View style={styles.modal}>
@@ -127,7 +139,8 @@ const styles = StyleSheet.create({
 	},
 	close: {
 		position: 'absolute',
-		left: 15
+		padding: 15,
+		left: 0
 	},
 	title: {
 		fontSize: 16,

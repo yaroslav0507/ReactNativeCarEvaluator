@@ -49,14 +49,15 @@ class TransportFilter extends Component {
 	  } = this.props;
 
 	  let BodyTypePicker = null;
-	  if (bodyStyles && bodyStyles.items) {
+	  let categoryBodyStyles = bodyStyles[category.value];
+	  if (categoryBodyStyles && categoryBodyStyles.items) {
 			BodyTypePicker = (
 				<OptionPicker
 					iconName="ios-construct-outline"
 					iconColor="#2ecc71"
 					title="Тип кузова"
 					value={bodyStyle && bodyStyle.name}
-					list={bodyStyles.items}
+					list={categoryBodyStyles && categoryBodyStyles.items}
 					selectedItem={bodyStyle && bodyStyle.value}
 					onItemSelected={(selectedItem) => onBodyStyleSelected(selectedItem)}/>
 			)
