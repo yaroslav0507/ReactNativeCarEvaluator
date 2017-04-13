@@ -1,11 +1,11 @@
 import {
-	SELECT_TRANSPORT_TYPE,
+	SELECT_CATEGORY,
 	SELECT_BODY_STYLE
 } from '../actions/transportFilterActions';
 
 export const selectCategory = (category) => {
 	return {
-    type: SELECT_TRANSPORT_TYPE,
+    type: SELECT_CATEGORY,
 		category
   }
 };

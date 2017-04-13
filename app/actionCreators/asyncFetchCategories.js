@@ -1,14 +1,14 @@
-import { REQUEST_TRANSPORT_TYPES, RECEIVE_TRANSPORT_TYPES} from '../actions/asyncFilterActions';
+import { REQUEST_CATEGORIES, RECEIVE_CATEGORIES} from '../actions/asyncFilterActions';
 
 export const requestCategories = () => {
 	return {
-		type: REQUEST_TRANSPORT_TYPES
+		type: REQUEST_CATEGORIES
 	}
 };
 
 export const receiveCategories = (json) => {
 	return {
-		type: RECEIVE_TRANSPORT_TYPES,
+		type: RECEIVE_CATEGORIES,
 		items: json,
 		receivedAt: Date.now()
 	}

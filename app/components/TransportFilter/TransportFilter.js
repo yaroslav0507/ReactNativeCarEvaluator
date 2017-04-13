@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 const {  StyleSheet, View, Text, Picker, StatusBar, TouchableOpacity } = require('react-native');
 
-import { TypePicker } from '../TypePicker';
-import { globalStyles } from '../styles/variables';
+import { globalStyles } from '../../styles/variables';
 import { OptionPicker } from '../OptionPicker/OptionPicker';
 
 class TransportFilter extends Component {
@@ -22,7 +21,7 @@ class TransportFilter extends Component {
 
 	getAveragePrice() {
 		const { category, bodyStyle } = this.props.filters;
-		fetch(`http://api.auto.ria.com/average?main_category=${category.id}&body_id=${bodyStyle.id}`)
+		fetch(`http://api.auto.ria.com/average?main_category=${category.value}&body_id=${bodyStyle.value}`)
 			.then(response => response.json())
 			.then(responseData => {
 
@@ -42,11 +41,26 @@ class TransportFilter extends Component {
 	  	onCategorySelected,
 			onBodyStyleSelected,
 			categories,
+			bodyStyles,
 			filters: {
 	  		category,
 				bodyStyle
 	  	}
 	  } = this.props;
+
+	  let BodyTypePicker = null;
+	  if (bodyStyles && bodyStyles.items) {
+			BodyTypePicker = (
+				<OptionPicker
+					iconName="ios-construct-outline"
+					iconColor="#2ecc71"
+					title="Тип кузова"
+					value={bodyStyle && bodyStyle.name}
+					list={bodyStyles.items}
+					selectedItem={bodyStyle && bodyStyle.value}
+					onItemSelected={(selectedItem) => onBodyStyleSelected(selectedItem)}/>
+			)
+		}
 
 		return (
       <View style={styles.container}>
@@ -59,17 +73,10 @@ class TransportFilter extends Component {
 					title="Вид транспорта"
 					value={category && category.name}
 					list={categories.items}
-					selectedItem={category.value}
+					selectedItem={category && category.value}
 					onItemSelected={(selectedItem) => onCategorySelected(selectedItem)}/>
 
-				<OptionPicker
-					iconName="ios-construct-outline"
-					iconColor="#2ecc71"
-					title="Тип кузова"
-					value={bodyStyle && bodyStyle.name}
-					list={categories.items}
-					selectedItem={category.value}
-					onItemSelected={(selectedItem) => onBodyStyleSelected(selectedItem)}/>
+				{BodyTypePicker}
 
 				<View >
 					<TouchableOpacity

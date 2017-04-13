@@ -1,15 +1,24 @@
 import {
-	SELECT_TRANSPORT_TYPE,
+	SELECT_CATEGORY,
 	SELECT_BODY_STYLE
 } from '../actions/transportFilterActions';
 
+const defaultFilter = {
+	name: null,
+	value: 0
+};
+
+const initialFilters = {
+	category: defaultFilter,
+	bodyStyle: defaultFilter
+};
 
 const filter = (state = {
-	name: null,
+	name: '',
 	value: 0
 }, action) => {
 	switch (action.type) {
-		case SELECT_TRANSPORT_TYPE:
+		case SELECT_CATEGORY:
 			return Object.assign({}, state, {
 				name: action.category.name,
 				value: action.category.value
@@ -17,18 +26,19 @@ const filter = (state = {
 		case SELECT_BODY_STYLE:
 			return {
 				name: action.bodyStyle.name,
-				id: action.bodyStyle.value
+				value: action.bodyStyle.value
 			};
 		default:
 			return state;
 	}
 };
 
-const filters = (state = {}, action) => {
+const filters = (state = initialFilters, action) => {
   switch (action.type) {
-		case SELECT_TRANSPORT_TYPE:
+		case SELECT_CATEGORY:
 			return Object.assign({}, state, {
-				category: filter(undefined, action)
+				category: filter(undefined, action),
+				bodyStyle: state.category && state.category.value === action.category.value ? state.bodyStyle : defaultFilter
 			});
 		case SELECT_BODY_STYLE:
       return Object.assign({}, state, {

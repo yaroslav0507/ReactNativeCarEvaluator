@@ -1,11 +1,13 @@
 import { TransportFilter } from './TransportFilter';
 import { connect } from 'react-redux';
 import { selectCategory, selectBodyStyle } from '../../actionCreators/transportFilterActionCreators';
-import { fetchCategories } from '../../actionCreators/asyncFilterActionCreators';
+import { fetchCategories } from '../../actionCreators/asyncFetchCategories';
+import { fetchBodyStyles } from '../../actionCreators/asyncFetchBodyStyles';
 
 const mapStateToProps = (state) => {
   return {
 		categories: state.data.categories,
+		bodyStyles: state.data.bodyStyles,
 		filters: state.filters
   }
 };
@@ -16,7 +18,8 @@ const mapDispatchToProps = (dispatch) => {
   		dispatch(fetchCategories())
 		},
 		onCategorySelected: (category) => {
-			dispatch(selectCategory(category))
+			dispatch(selectCategory(category));
+			dispatch(fetchBodyStyles(category.value));
     },
 		onBodyStyleSelected: (bodyStyle) => {
 		  dispatch(selectBodyStyle(bodyStyle))

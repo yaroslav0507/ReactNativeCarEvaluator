@@ -15,6 +15,9 @@ export class OptionPicker extends Component {
 	}
 
 	setModalVisible(visible) {
+		visible && this.setState({
+			dataSource: this.ds.cloneWithRows(this.props.list)
+		});
 		this.setState({modalVisible: visible});
 	}
 

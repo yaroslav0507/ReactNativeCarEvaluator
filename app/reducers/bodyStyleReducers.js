@@ -1,18 +1,18 @@
 import {
-	REQUEST_CATEGORIES,
-	RECEIVE_CATEGORIES
+	REQUEST_BODY_STYLES,
+	RECEIVE_BODY_STYLES
 } from '../actions/asyncFilterActions'
 
-const categories = (state = {
+const bodyStyles = (state = {
 	isFetching: false,
 	items: []
 }, action) => {
 	switch (action.type) {
-		case REQUEST_CATEGORIES:
+		case REQUEST_BODY_STYLES:
 			return Object.assign({}, state, {
 				isFetching: true
 			});
-		case RECEIVE_CATEGORIES:
+		case RECEIVE_BODY_STYLES:
 			return Object.assign({}, state, {
 				isFetching: false,
 				items: action.items,
@@ -24,5 +24,5 @@ const categories = (state = {
 };
 
 export {
-	categories
+	bodyStyles
 }
