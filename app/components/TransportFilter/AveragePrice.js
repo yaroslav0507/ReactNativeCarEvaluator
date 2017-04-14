@@ -16,6 +16,7 @@ export class AveragePrice extends Component {
 					<Text style={styles.averagePriceValue}>
 						{price.average && '$'} {Math.round(price.average)}
 					</Text>
+					<Text style={styles.averagePriceDescription}>{price.description}</Text>
 				</View>
 			)
 		}
@@ -29,6 +30,12 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center'
+	},
+	averagePriceDescription: {
+		fontSize: 16,
+		color: '#bdc3c7',
+		paddingHorizontal: 15,
+		textAlign: 'center'
 	},
 	averagePriceValue: {
 		fontSize: 40,

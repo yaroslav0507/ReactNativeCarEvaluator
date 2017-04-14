@@ -12,7 +12,8 @@ const price = (state = {
 		case RECEIVE_AVERAGE_PRICE:
 			return Object.assign({}, state, {
 				isFetching: false,
-				average: action.averagePrice,
+				average: action.averagePrice.value,
+				description: action.averagePrice.description,
 				lastUpdated: action.receivedAt
 			});
 		default:
