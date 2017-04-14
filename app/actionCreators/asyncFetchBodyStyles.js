@@ -1,8 +1,9 @@
 import { REQUEST_BODY_STYLES, RECEIVE_BODY_STYLES} from '../actions/asyncFilterActions';
 
-export const requestBodyStyles = () => {
+export const requestBodyStyles = (categoryID) => {
 	return {
-		type: REQUEST_BODY_STYLES
+		type: REQUEST_BODY_STYLES,
+		categoryID
 	}
 };
 
@@ -17,7 +18,7 @@ export const receiveBodyStyles = (categoryID, json) => {
 
 export const fetchBodyStyles = (categoryID) => {
 	return (dispatch) => {
-		dispatch(requestBodyStyles());
+		dispatch(requestBodyStyles(categoryID));
 
 		return fetch(`http://api.auto.ria.com/categories/${categoryID}/bodystyles`)
 			.then(response => response.json())
