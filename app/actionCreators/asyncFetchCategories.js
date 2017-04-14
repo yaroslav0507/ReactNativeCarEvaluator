@@ -6,10 +6,10 @@ export const requestCategories = () => {
 	}
 };
 
-export const receiveCategories = (json) => {
+export const receiveCategories = (items) => {
 	return {
 		type: RECEIVE_CATEGORIES,
-		items: json,
+		items,
 		receivedAt: Date.now()
 	}
 };

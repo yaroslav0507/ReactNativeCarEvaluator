@@ -16,12 +16,12 @@ export const receiveAveragePrice = (averagePrice) => {
 
 export const fetchAveragePrice = (query) => {
 	const baseURL = 'http://api.auto.ria.com/average';
-	const { categoryID, bodyStyleID } = query;
+	const { categoryID, bodyStyleID, markID } = query;
 
 	return (dispatch) => {
 		dispatch(requestAveragePrice());
 
-		return fetch(`${baseURL}?main_category=${categoryID}&body_id=${bodyStyleID}`)
+		return fetch(`${baseURL}?main_category=${categoryID}&body_id=${bodyStyleID}&marka_id=${markID}`)
 			.then(response => response.json())
 			.then(responseData => {
 

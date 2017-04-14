@@ -7,12 +7,12 @@ export const requestBodyStyles = (categoryID) => {
 	}
 };
 
-export const receiveBodyStyles = (categoryID, json) => {
+export const receiveBodyStyles = (categoryID, items) => {
 	return {
 		type: RECEIVE_BODY_STYLES,
-		items: json,
-		receivedAt: Date.now(),
-		categoryID
+		items,
+		categoryID,
+		receivedAt: Date.now()
 	}
 };
 

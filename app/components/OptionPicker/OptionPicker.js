@@ -33,7 +33,7 @@ export class OptionPicker extends Component {
 	}
 
   render() {
-		const { iconName, iconColor, title, value, selectedItem } = this.props;
+		const { iconName, iconColor, title, selectedItem } = this.props;
 		return (
     	<View style={styles.container}>
 				<TouchableOpacity style={cardStyles.card}
@@ -44,14 +44,14 @@ export class OptionPicker extends Component {
 								color={iconColor}/>
 					<Text style={cardStyles.title}>{title}</Text>
 					<Text style={cardStyles.value}
-								numberOfLines={1}>{value}</Text>
+								numberOfLines={1}>{selectedItem.name}</Text>
 				</TouchableOpacity>
 
 				<OptionPickerModal
 					title={title}
 					dataSource={this.state.dataSource}
 					modalVisible={this.state.modalVisible}
-					selectedItem={selectedItem}
+					selectedItem={selectedItem.value}
 					onItemSelected={(rowData) => this.onItemSelected(rowData)}
 					setModalVisible={(boolean) => this.setModalVisible(boolean)}
 					clearSelection={() => this.clearSelection()}

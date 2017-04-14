@@ -2,7 +2,9 @@ import {
 	SELECT_CATEGORY,
 	CLEAR_CATEGORY,
 	SELECT_BODY_STYLE,
-	CLEAR_BODY_STYLE
+	CLEAR_BODY_STYLE,
+	SELECT_MARK,
+	CLEAR_MARK
 } from '../actions/transportFilterActions';
 
 const defaultFilter = {
@@ -18,15 +20,12 @@ const initialFilters = {
 const filter = (state = defaultFilter, action) => {
 	switch (action.type) {
 		case SELECT_CATEGORY:
-			return Object.assign({}, state, {
-				name: action.category.name,
-				value: action.category.value
-			});
 		case SELECT_BODY_STYLE:
-			return {
-				name: action.bodyStyle.name,
-				value: action.bodyStyle.value
-			};
+		case SELECT_MARK:
+			return Object.assign({}, state, {
+				name: action.data.name,
+				value: action.data.value
+			});
 		default:
 			return state;
 	}
@@ -34,11 +33,12 @@ const filter = (state = defaultFilter, action) => {
 
 const filters = (state = initialFilters, action) => {
   switch (action.type) {
-
 		case SELECT_CATEGORY:
+			const sameOptionSelected = state.data && state.data.value === action.data.value;
 			return Object.assign({}, state, {
 				category: filter(undefined, action),
-				bodyStyle: state.category && state.category.value === action.category.value ? state.bodyStyle : defaultFilter
+				bodyStyle: sameOptionSelected ? state.bodyStyle : defaultFilter,
+				mark: sameOptionSelected ? state.mark : defaultFilter
 			});
 		case CLEAR_CATEGORY:
 			return Object.assign({}, state, {
@@ -53,6 +53,15 @@ const filters = (state = initialFilters, action) => {
 		case CLEAR_BODY_STYLE:
 			return Object.assign({}, state, {
 				bodyStyle: defaultFilter
+			});
+
+		case SELECT_MARK:
+      return Object.assign({}, state, {
+        mark: filter(undefined, action)
+      });
+		case CLEAR_MARK:
+			return Object.assign({}, state, {
+				mark: defaultFilter
 			});
 
     default:

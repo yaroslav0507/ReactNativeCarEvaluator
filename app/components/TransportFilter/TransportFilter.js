@@ -21,10 +21,11 @@ class TransportFilter extends Component {
 	}
 
 	getAveragePrice() {
-		const { category, bodyStyle } = this.props.filters;
+		const { category, bodyStyle, mark } = this.props.filters;
 		const query = {
 			categoryID: category.value,
-			bodyStyleID: bodyStyle.value
+			bodyStyleID: bodyStyle.value,
+			markID: mark.value
 		};
 		this.props.onGetAveragePrice(query);
 	}
@@ -35,11 +36,15 @@ class TransportFilter extends Component {
 			onCategoryCleared,
 			onBodyStyleSelected,
 			onBodyStyleCleared,
+			onMarkSelected,
+			onMarkCleared,
 			categories,
 			bodyStyles,
+			marks,
 			filters: {
 	  		category,
-				bodyStyle
+				bodyStyle,
+				mark
 	  	},
 			price
 	  } = this.props;
@@ -49,14 +54,28 @@ class TransportFilter extends Component {
 	  if (categoryBodyStyles && categoryBodyStyles.items) {
 			BodyTypePicker = (
 				<OptionPicker
-					iconName="ios-construct-outline"
+					iconName="ios-bus-outline"
 					iconColor="#2ecc71"
 					title="Тип кузова"
-					value={bodyStyle && bodyStyle.name}
 					list={categoryBodyStyles && categoryBodyStyles.items}
-					selectedItem={bodyStyle && bodyStyle.value}
+					selectedItem={bodyStyle}
 					onItemSelected={(selectedItem) => onBodyStyleSelected(selectedItem)}
 					onClearSelection={() => onBodyStyleCleared()}/>
+			)
+		}
+
+		let MarkPicker = null;
+		let categoryMarks = marks[category.value];
+		if (categoryMarks && categoryMarks.items) {
+			MarkPicker = (
+				<OptionPicker
+					iconName="ios-key-outline"
+					iconColor="#e74c3c"
+					title="Марка"
+					list={categoryMarks && categoryMarks.items}
+					selectedItem={mark}
+					onItemSelected={(selectedItem) => onMarkSelected(selectedItem)}
+					onClearSelection={() => onMarkCleared()}/>
 			)
 		}
 
@@ -69,13 +88,13 @@ class TransportFilter extends Component {
 					iconName="ios-car-outline"
 					iconColor="#3498db"
 					title="Вид транспорта"
-					value={category && category.name}
 					list={categories.items}
-					selectedItem={category && category.value}
+					selectedItem={category}
 					onItemSelected={(selectedItem) => onCategorySelected(selectedItem)}
 					onClearSelection={() => onCategoryCleared()}/>
 
 				{BodyTypePicker}
+				{MarkPicker}
 
 				<View >
 					<TouchableOpacity
