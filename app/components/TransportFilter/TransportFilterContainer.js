@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import { selectCategory, clearCategory, selectBodyStyle, clearBodyStyle } from '../../actionCreators/transportFilterActionCreators';
 import { fetchCategoriesIfNeeded } from '../../actionCreators/asyncFetchCategories';
 import { fetchBodyStylesIfNeeded } from '../../actionCreators/asyncFetchBodyStyles';
+import { fetchAveragePrice } from '../../actionCreators/asyncFetchPrices';
 
 const mapStateToProps = (state) => {
   return {
 		categories: state.data.categories,
 		bodyStyles: state.data.bodyStyles,
-		filters: state.filters
+		filters: state.filters,
+		price: state.price
   }
 };
 
@@ -29,7 +31,10 @@ const mapDispatchToProps = (dispatch) => {
     },
 		onBodyStyleCleared: () => {
 		  dispatch(clearBodyStyle())
-    }
+    },
+		onGetAveragePrice: (query) => {
+			dispatch(fetchAveragePrice(query))
+		}
   }
 };
 

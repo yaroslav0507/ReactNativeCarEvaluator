@@ -3,6 +3,7 @@ const {  StyleSheet, View, Text, Picker, StatusBar, TouchableOpacity } = require
 
 import { globalStyles } from '../../styles/variables';
 import { OptionPicker } from '../OptionPicker/OptionPicker';
+import { AveragePrice } from './AveragePrice';
 
 class TransportFilter extends Component {
 	constructor(props) {
@@ -21,19 +22,11 @@ class TransportFilter extends Component {
 
 	getAveragePrice() {
 		const { category, bodyStyle } = this.props.filters;
-		fetch(`http://api.auto.ria.com/average?main_category=${category.value}&body_id=${bodyStyle.value}`)
-			.then(response => response.json())
-			.then(responseData => {
-
-				const { arithmeticMean, message } = responseData;
-				arithmeticMean && this.setState({
-					averagePrice: Math.round(arithmeticMean)
-				});
-
-				message && this.setState({
-					averagePrice: message
-				});
-			})
+		const query = {
+			categoryID: category.value,
+			bodyStyleID: bodyStyle.value
+		};
+		this.props.onGetAveragePrice(query);
 	}
 
 	render() {
@@ -47,7 +40,8 @@ class TransportFilter extends Component {
 			filters: {
 	  		category,
 				bodyStyle
-	  	}
+	  	},
+			price
 	  } = this.props;
 
 	  let BodyTypePicker = null;
@@ -91,12 +85,8 @@ class TransportFilter extends Component {
 					</TouchableOpacity>
 				</View>
 
+				<AveragePrice price={price}/>
 
-				<View style={styles.averagePriceContainer}>
-					<Text style={styles.averagePriceValue}>
-						{this.state.averagePrice && '$'} {this.state.averagePrice}
-					</Text>
-				</View>
       </View>
 		)
 	}
@@ -125,16 +115,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#FFF',
     fontWeight: '700'
-  },
-	averagePriceContainer: {
-  	flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center'
-	},
-	averagePriceValue: {
-  	fontSize: 40,
-		color: '#bdc3c7'
-	}
+  }
 });
 
 

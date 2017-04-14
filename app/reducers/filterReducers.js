@@ -34,6 +34,7 @@ const filter = (state = defaultFilter, action) => {
 
 const filters = (state = initialFilters, action) => {
   switch (action.type) {
+
 		case SELECT_CATEGORY:
 			return Object.assign({}, state, {
 				category: filter(undefined, action),
@@ -44,6 +45,7 @@ const filters = (state = initialFilters, action) => {
 				category: defaultFilter,
 				bodyStyle: defaultFilter
 			});
+
 		case SELECT_BODY_STYLE:
       return Object.assign({}, state, {
         bodyStyle: filter(undefined, action)
@@ -52,8 +54,10 @@ const filters = (state = initialFilters, action) => {
 			return Object.assign({}, state, {
 				bodyStyle: defaultFilter
 			});
+
     default:
       return state;
+
   }
 };
 
