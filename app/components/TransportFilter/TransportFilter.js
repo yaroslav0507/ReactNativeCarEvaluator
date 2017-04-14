@@ -39,7 +39,9 @@ class TransportFilter extends Component {
 	render() {
 	  const {
 	  	onCategorySelected,
+			onCategoryCleared,
 			onBodyStyleSelected,
+			onBodyStyleCleared,
 			categories,
 			bodyStyles,
 			filters: {
@@ -59,7 +61,8 @@ class TransportFilter extends Component {
 					value={bodyStyle && bodyStyle.name}
 					list={categoryBodyStyles && categoryBodyStyles.items}
 					selectedItem={bodyStyle && bodyStyle.value}
-					onItemSelected={(selectedItem) => onBodyStyleSelected(selectedItem)}/>
+					onItemSelected={(selectedItem) => onBodyStyleSelected(selectedItem)}
+					onClearSelection={() => onBodyStyleCleared()}/>
 			)
 		}
 
@@ -75,7 +78,8 @@ class TransportFilter extends Component {
 					value={category && category.name}
 					list={categories.items}
 					selectedItem={category && category.value}
-					onItemSelected={(selectedItem) => onCategorySelected(selectedItem)}/>
+					onItemSelected={(selectedItem) => onCategorySelected(selectedItem)}
+					onClearSelection={() => onCategoryCleared()}/>
 
 				{BodyTypePicker}
 

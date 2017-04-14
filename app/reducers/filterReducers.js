@@ -1,10 +1,12 @@
 import {
 	SELECT_CATEGORY,
-	SELECT_BODY_STYLE
+	CLEAR_CATEGORY,
+	SELECT_BODY_STYLE,
+	CLEAR_BODY_STYLE
 } from '../actions/transportFilterActions';
 
 const defaultFilter = {
-	name: null,
+	name: '',
 	value: 0
 };
 
@@ -13,10 +15,7 @@ const initialFilters = {
 	bodyStyle: defaultFilter
 };
 
-const filter = (state = {
-	name: '',
-	value: 0
-}, action) => {
+const filter = (state = defaultFilter, action) => {
 	switch (action.type) {
 		case SELECT_CATEGORY:
 			return Object.assign({}, state, {
@@ -40,10 +39,19 @@ const filters = (state = initialFilters, action) => {
 				category: filter(undefined, action),
 				bodyStyle: state.category && state.category.value === action.category.value ? state.bodyStyle : defaultFilter
 			});
+		case CLEAR_CATEGORY:
+			return Object.assign({}, state, {
+				category: defaultFilter,
+				bodyStyle: defaultFilter
+			});
 		case SELECT_BODY_STYLE:
       return Object.assign({}, state, {
         bodyStyle: filter(undefined, action)
       });
+		case CLEAR_BODY_STYLE:
+			return Object.assign({}, state, {
+				bodyStyle: defaultFilter
+			});
     default:
       return state;
   }

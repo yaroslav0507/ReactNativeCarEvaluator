@@ -28,11 +28,12 @@ export class OptionPicker extends Component {
 	}
 
 	clearSelection() {
+		this.props.onClearSelection();
 		this.setModalVisible(false);
 	}
 
   render() {
-		const { iconName, iconColor, title, value, list, selectedItem } = this.props;
+		const { iconName, iconColor, title, value, selectedItem } = this.props;
 		return (
     	<View style={styles.container}>
 				<TouchableOpacity style={cardStyles.card}
