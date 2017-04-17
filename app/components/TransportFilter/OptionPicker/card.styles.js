@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { globalStyles } from '../../styles/variables';
+import { globalStyles } from '../../../styles/variables';
 
 export const cardStyles = StyleSheet.create({
 	card: {

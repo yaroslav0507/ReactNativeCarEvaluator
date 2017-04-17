@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 const {  StyleSheet, View, Text, Picker, StatusBar, TouchableOpacity } = require('react-native');
 
 import { globalStyles } from '../../styles/variables';
-import { OptionPicker } from '../OptionPicker/OptionPicker';
+import { OptionPicker } from './OptionPicker/OptionPicker';
 import { AveragePrice } from './AveragePrice';
+
+import { CategoryFilter, BodyStyleFilter } from './filters';
 
 class TransportFilter extends Component {
 	constructor(props) {
@@ -27,41 +29,20 @@ class TransportFilter extends Component {
 
 	render() {
 	  const {
-	  	onCategorySelected,
-			onCategoryCleared,
-			onBodyStyleSelected,
-			onBodyStyleCleared,
 			onMarkSelected,
 			onMarkCleared,
 			onModelSelected,
 			onModelCleared,
-			categories,
-			bodyStyles,
 			marks,
 			models,
 			filters: {
 	  		category,
-				bodyStyle,
 				mark,
 				model
 	  	},
 			price
 	  } = this.props;
 
-	  let BodyTypePicker = null;
-	  let categoryBodyStyles = bodyStyles[category.value];
-	  if (categoryBodyStyles && categoryBodyStyles.items) {
-			BodyTypePicker = (
-				<OptionPicker
-					iconName="ios-bus-outline"
-					iconColor="#2ecc71"
-					title="Тип кузова"
-					list={categoryBodyStyles && categoryBodyStyles.items}
-					selectedItem={bodyStyle}
-					onItemSelected={(selectedItem) => onBodyStyleSelected(selectedItem)}
-					onClearSelection={() => onBodyStyleCleared()}/>
-			)
-		}
 
 		let MarkPicker = null;
 		let categoryMarks = marks[category.value];
@@ -98,16 +79,9 @@ class TransportFilter extends Component {
 				<StatusBar barStyle="light-content"/>
         <Text style={styles.title}>Выберите тип транспорта</Text>
 
-				<OptionPicker
-					iconName="ios-car-outline"
-					iconColor="#3498db"
-					title="Вид транспорта"
-					list={categories.items}
-					selectedItem={category}
-					onItemSelected={(selectedItem) => onCategorySelected(selectedItem)}
-					onClearSelection={() => onCategoryCleared()}/>
+				<CategoryFilter/>
+				<BodyStyleFilter/>
 
-				{BodyTypePicker}
 				{MarkPicker}
 				{ModelPicker}
 
