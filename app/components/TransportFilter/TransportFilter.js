@@ -2,22 +2,16 @@ import React, { Component } from 'react';
 const {  StyleSheet, View, Text, Picker, StatusBar, TouchableOpacity } = require('react-native');
 
 import { globalStyles } from '../../styles/variables';
-import { OptionPicker } from './OptionPicker/OptionPicker';
 import { AveragePrice } from './AveragePrice';
 
-import { CategoryFilter, BodyStyleFilter } from './filters';
+import { CategoryFilter, BodyStyleFilter, MarkFilter, ModelFilter } from './filters';
 
 class TransportFilter extends Component {
 	constructor(props) {
 		super(props);
-		this.dispatch = props.dispatch;
 		this.state = {
 			isFirstAttempt: true
 		}
-	}
-
-	componentDidMount() {
-		this.props.onViewLoaded();
 	}
 
 	getAveragePrice() {
@@ -28,51 +22,7 @@ class TransportFilter extends Component {
 	}
 
 	render() {
-	  const {
-			onMarkSelected,
-			onMarkCleared,
-			onModelSelected,
-			onModelCleared,
-			marks,
-			models,
-			filters: {
-	  		category,
-				mark,
-				model
-	  	},
-			price
-	  } = this.props;
-
-
-		let MarkPicker = null;
-		let categoryMarks = marks[category.value];
-		if (categoryMarks && categoryMarks.items) {
-			MarkPicker = (
-				<OptionPicker
-					iconName="ios-key-outline"
-					iconColor="#e74c3c"
-					title="Марка"
-					list={categoryMarks && categoryMarks.items}
-					selectedItem={mark}
-					onItemSelected={(selectedItem) => onMarkSelected(selectedItem)}
-					onClearSelection={() => onMarkCleared()}/>
-			)
-		}
-
-		let ModelPicker = null;
-		let categoryModels = models[category.value] && models[category.value][mark.value];
-		if (categoryModels && categoryModels.items) {
-			ModelPicker = (
-				<OptionPicker
-					iconName="ios-star-outline"
-					iconColor="#f1c40f"
-					title="Модель"
-					list={categoryModels && categoryModels.items}
-					selectedItem={model}
-					onItemSelected={(selectedItem) => onModelSelected(selectedItem)}
-					onClearSelection={() => onModelCleared()}/>
-			)
-		}
+		const { price } = this.props;
 
 		return (
       <View style={styles.container}>
@@ -81,9 +31,8 @@ class TransportFilter extends Component {
 
 				<CategoryFilter/>
 				<BodyStyleFilter/>
-
-				{MarkPicker}
-				{ModelPicker}
+				<MarkFilter/>
+				<ModelFilter/>
 
 				<View >
 					<TouchableOpacity

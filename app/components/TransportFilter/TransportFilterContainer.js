@@ -1,13 +1,6 @@
 import { TransportFilter } from './TransportFilter';
 import { connect } from 'react-redux';
-import {
-	selectMark,
-	clearMark,
-	selectModel,
-	clearModel
-} from '../../actionCreators/transportFilterActionCreators';
-import { fetchCategoriesIfNeeded } from '../../actionCreators/asyncFetchCategories';
-import { fetchModelsIfNeeded } from '../../actionCreators/asyncFetchModels';
+
 import { fetchAveragePrice } from '../../actionCreators/asyncFetchPrices';
 
 const mapStateToProps = (state) => {
@@ -21,24 +14,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-  	onViewLoaded: () => {
-  		dispatch(fetchCategoriesIfNeeded())
-		},
-		onMarkSelected: (mark) => {
-			dispatch(selectMark(mark));
-			dispatch(clearModel());
-			dispatch(fetchModelsIfNeeded());
-		},
-		onMarkCleared: () => {
-			dispatch(clearMark());
-			dispatch(clearModel());
-		},
-		onModelSelected: (model) => {
-			dispatch(selectModel(model));
-		},
-		onModelCleared: () => {
-			dispatch(clearModel())
-		},
 		onGetAveragePrice: (query) => {
 			dispatch(fetchAveragePrice(query))
 		}
