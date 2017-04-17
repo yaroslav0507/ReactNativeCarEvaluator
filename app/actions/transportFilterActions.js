@@ -6,3 +6,6 @@ export const CLEAR_BODY_STYLE = 'CLEAR_BODY_STYLE';
 
 export const SELECT_MARK = 'SELECT_MARK';
 export const CLEAR_MARK = 'CLEAR_MARK';
+
+export const SELECT_MODEL = 'SELECT_MODEL';
+export const CLEAR_MODEL = 'CLEAR_MODEL';

@@ -38,8 +38,10 @@ export const shouldFetchBodyStyles = (state, categoryID) => {
 	}
 };
 
-export const fetchBodyStylesIfNeeded = (categoryID) => {
+export const fetchBodyStylesIfNeeded = () => {
 	return (dispatch, getState) => {
+		const categoryID = getState().filters.category.value;
+
 		if (shouldFetchBodyStyles(getState(), categoryID)) {
 			return dispatch(fetchBodyStyles(categoryID));
 		} else {

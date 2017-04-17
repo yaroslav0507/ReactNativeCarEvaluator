@@ -14,29 +14,33 @@ export const receiveAveragePrice = (averagePrice) => {
 	}
 };
 
-export const fetchAveragePrice = (query) => {
-	const priceEngineURL = 'http://api.auto.ria.com/average';
+export const fetchAveragePrice = () => {
+	const priceEngineURL = 'http://api.auto.ria.com/average?damage=0&under_credit=0&confiscated_car=0&onRepairParts=0&custom=0';
 	const descriptionEngineURL = `https://auto.ria.com/demo/bu/catalogs/averagePriceCalculator/text`;
-	const { categoryID, bodyStyleID, markID, modelID, stateID, gearBoxID, yearFrom, yearTo } = query;
 
-	return (dispatch) => {
+	return (dispatch, getState) => {
 		dispatch(requestAveragePrice());
+
+		const { filters } = getState();
+
+		const categoryID = filters.category.value,
+			bodyStyleID = filters.bodyStyle.value,
+			markID = filters.mark.value,
+			modelID = filters.model.value;
 
 		const getQueryString = (query, param) => {
 			return param ? `&${query}=${param}` : '';
 		};
 
-		const descriptionApiRequest = descriptionEngineURL + '?' +
-			getQueryString('category_id[0]', categoryID) +
-			getQueryString('bodystyle[0]', bodyStyleID) +
-			getQueryString('marka_id[0]', markID) +
-			getQueryString('model_id[0]', modelID) +
-			getQueryString('state[0]', stateID) +
-			getQueryString('gearbox[0]', gearBoxID) +
-			getQueryString('s_yers[0]', yearFrom) +
-			getQueryString('po_yers[0]', yearTo) +
-			'&langId=2';
-
+		const descriptionApiRequest = descriptionEngineURL + '?&langId=2' +
+			getQueryString('category_id', categoryID || 0) +
+			getQueryString('bodystyle[0]', bodyStyleID || 0) +
+			getQueryString('marka_id[0]', markID || 0) +
+			getQueryString('model_id[0]', modelID || 0) +
+			getQueryString('state[0]',  0) +
+			getQueryString('gearbox[0]', 0) +
+			getQueryString('s_yers[0]', 0) +
+			getQueryString('po_yers[0]', 0);
 
 		const descriptionPromise = new Promise((resolve, reject) => {
 			return fetch(descriptionApiRequest)
@@ -47,13 +51,15 @@ export const fetchAveragePrice = (query) => {
 				});
 		});
 
-		const category = categoryID ? `main_category=${categoryID}` : '';
+		const category = categoryID ? `&main_category=${categoryID}` : '';
 		const bodyStyle = bodyStyleID ? `&body_id=${bodyStyleID}` : '';
 		const mark = markID ? `&marka_id=${markID}` : '';
+		const model = modelID ? `&model_id=${modelID}` : '';
 
 
 		const averagePricePromise = new Promise((resolve, reject) => {
-			return fetch(`${priceEngineURL}?${category}${bodyStyle}${mark}`)
+			const averagePriceRequest = [category,bodyStyle,mark,model].join('');
+			return fetch(`${priceEngineURL}${averagePriceRequest}`)
 				.then(response => response.json())
 				.then(responseData => {
 					const { interQuartileMean } = responseData;

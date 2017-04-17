@@ -4,7 +4,9 @@ import {
 	SELECT_BODY_STYLE,
 	CLEAR_BODY_STYLE,
 	SELECT_MARK,
-	CLEAR_MARK
+	CLEAR_MARK,
+	SELECT_MODEL,
+	CLEAR_MODEL
 } from '../actions/transportFilterActions';
 
 export const selectCategory = (data) => {
@@ -43,5 +45,18 @@ export const selectMark = (data) => {
 export const clearMark = () => {
 	return {
 		type: CLEAR_MARK
+	}
+};
+
+export const selectModel = (data) => {
+	return {
+    type: SELECT_MODEL,
+		data
+  }
+};
+
+export const clearModel = () => {
+	return {
+		type: CLEAR_MODEL
 	}
 };

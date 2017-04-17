@@ -23,7 +23,7 @@ export class OptionPickerModal extends Component {
 					name={iconName}
 					size={25}
 					color={iconColor}/>
-				<Text style={styles.listRowText}>{rowData.name}</Text>
+				<Text style={styles.listRowText}>{rowData.name.toString()}</Text>
 			</TouchableOpacity>
 		)
 	}
@@ -39,7 +39,7 @@ export class OptionPickerModal extends Component {
 
 				<Header
 					title={title}
-					onLeftButtonPress={setModalVisible}
+					onLeftButtonPress={() => setModalVisible(false)}
 					onRightButtonPress={clearSelection}/>
 
 				<View style={styles.modal}>

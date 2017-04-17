@@ -10,9 +10,7 @@ class TransportFilter extends Component {
 		super(props);
 		this.dispatch = props.dispatch;
 		this.state = {
-			category: null,
-			bodyStyle: null,
-			averagePrice: null,
+			isFirstAttempt: true
 		}
 	}
 
@@ -21,13 +19,10 @@ class TransportFilter extends Component {
 	}
 
 	getAveragePrice() {
-		const { category, bodyStyle, mark } = this.props.filters;
-		const query = {
-			categoryID: category.value,
-			bodyStyleID: bodyStyle.value,
-			markID: mark.value
-		};
-		this.props.onGetAveragePrice(query);
+		this.setState({
+			isFirstAttempt: false
+		});
+		this.props.onGetAveragePrice();
 	}
 
 	render() {
@@ -38,13 +33,17 @@ class TransportFilter extends Component {
 			onBodyStyleCleared,
 			onMarkSelected,
 			onMarkCleared,
+			onModelSelected,
+			onModelCleared,
 			categories,
 			bodyStyles,
 			marks,
+			models,
 			filters: {
 	  		category,
 				bodyStyle,
-				mark
+				mark,
+				model
 	  	},
 			price
 	  } = this.props;
@@ -79,6 +78,21 @@ class TransportFilter extends Component {
 			)
 		}
 
+		let ModelPicker = null;
+		let categoryModels = models[category.value] && models[category.value][mark.value];
+		if (categoryModels && categoryModels.items) {
+			ModelPicker = (
+				<OptionPicker
+					iconName="ios-star-outline"
+					iconColor="#f1c40f"
+					title="Модель"
+					list={categoryModels && categoryModels.items}
+					selectedItem={model}
+					onItemSelected={(selectedItem) => onModelSelected(selectedItem)}
+					onClearSelection={() => onModelCleared()}/>
+			)
+		}
+
 		return (
       <View style={styles.container}>
 				<StatusBar barStyle="light-content"/>
@@ -95,6 +109,7 @@ class TransportFilter extends Component {
 
 				{BodyTypePicker}
 				{MarkPicker}
+				{ModelPicker}
 
 				<View >
 					<TouchableOpacity
@@ -104,7 +119,7 @@ class TransportFilter extends Component {
 					</TouchableOpacity>
 				</View>
 
-				<AveragePrice price={price}/>
+				<AveragePrice price={price} show={!this.state.isFirstAttempt}/>
 
       </View>
 		)

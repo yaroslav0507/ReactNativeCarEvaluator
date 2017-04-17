@@ -38,8 +38,10 @@ export const shouldFetchMarks = (state, categoryID) => {
 	}
 };
 
-export const fetchMarksIfNeeded = (categoryID) => {
+export const fetchMarksIfNeeded = () => {
 	return (dispatch, getState) => {
+		const categoryID = getState().filters.category.value;
+
 		if (shouldFetchMarks(getState(), categoryID)) {
 			return dispatch(fetchMarks(categoryID));
 		} else {
