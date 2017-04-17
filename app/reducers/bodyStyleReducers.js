@@ -3,35 +3,37 @@ import {
 	RECEIVE_BODY_STYLES
 } from '../actions/asyncFilterActions'
 
-const bodyStyle = (state = {
-	isFetching: false,
-	items: []
-}, action) => {
-	switch (action.type) {
-		case REQUEST_BODY_STYLES:
-			return Object.assign({}, state, {
-				[action.categoryID]: { isFetching: true }
-			});
-		case RECEIVE_BODY_STYLES:
-			return Object.assign({}, {
-				isFetching: false,
-				items: action.items,
-				lastUpdated: action.receivedAt
-			});
-	}
+import { updateObject, createReducer, initialDataState } from './reducerUtilites';
+
+const requestBodyStyles = (state, action) => {
+	return updateObject(state, {
+		[action.categoryID]: { isFetching: true }
+	})
 };
 
-const bodyStyles = (state = {}, action) => {
-	switch (action.type) {
-		case REQUEST_BODY_STYLES:
-		case RECEIVE_BODY_STYLES:
-			return Object.assign({}, state, {
-				[action.categoryID]: bodyStyle(undefined, action)
-			});
-		default:
-			return state;
-	}
+const receiveBodyStyles = (state, action) => {
+	return updateObject(state, {
+		isFetching: false,
+		items: action.items,
+		lastUpdated: action.receivedAt
+	})
 };
+
+const bodyStyle = createReducer(initialDataState, {
+	[REQUEST_BODY_STYLES]: requestBodyStyles,
+	[RECEIVE_BODY_STYLES]: receiveBodyStyles
+});
+
+const delegateToSubReducer = (state, action) => {
+	return updateObject(state, {
+		[action.categoryID]: bodyStyle(undefined, action)
+	});
+};
+
+const bodyStyles = createReducer({}, {
+	[REQUEST_BODY_STYLES]: delegateToSubReducer,
+	[RECEIVE_BODY_STYLES]: delegateToSubReducer
+});
 
 export {
 	bodyStyles

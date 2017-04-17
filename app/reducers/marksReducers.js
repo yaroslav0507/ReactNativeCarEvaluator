@@ -1,37 +1,39 @@
 import {
 	REQUEST_MARKS,
 	RECEIVE_MARKS
-} from '../actions/asyncFilterActions'
+} from '../actions/asyncFilterActions';
 
-const mark = (state = {
-	isFetching: false,
-	items: []
-}, action) => {
-	switch (action.type) {
-		case REQUEST_MARKS:
-			return Object.assign({}, state, {
-				[action.categoryID]: { isFetching: true }
-			});
-		case RECEIVE_MARKS:
-			return Object.assign({}, {
-				isFetching: false,
-				items: action.items,
-				lastUpdated: action.receivedAt
-			});
-	}
+import { updateObject, createReducer, initialDataState } from './reducerUtilites';
+
+const requestMarks = (state, action) => {
+	return updateObject(state, {
+		[action.categoryID]: { isFetching: true }
+	})
 };
 
-const marks = (state = {}, action) => {
-	switch (action.type) {
-		case REQUEST_MARKS:
-		case RECEIVE_MARKS:
-			return Object.assign({}, state, {
-				[action.categoryID]: mark(undefined, action)
-			});
-		default:
-			return state;
-	}
+const receiveMarks = (state, actions) => {
+	return updateObject(state, {
+		isFetching: false,
+		items: action.items,
+		lastUpdated: action.receivedAt
+	})
 };
+
+const mark = createReducer(initialDataState, {
+	[REQUEST_MARKS]: requestMarks,
+	[RECEIVE_MARKS]: receiveMarks
+});
+
+const delegateToSubReducer = (state, action) => {
+	return updateObject(state, {
+		[action.categoryID]: mark(undefined, action)
+	})
+};
+
+const marks = createReducer({}, {
+	[REQUEST_MARKS]: delegateToSubReducer,
+	[RECEIVE_MARKS]: delegateToSubReducer,
+});
 
 export {
 	marks

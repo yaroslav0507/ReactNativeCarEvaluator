@@ -3,25 +3,27 @@ import {
 	RECEIVE_CATEGORIES
 } from '../actions/asyncFilterActions'
 
-const categories = (state = {
-	isFetching: false,
-	items: []
-}, action) => {
-	switch (action.type) {
-		case REQUEST_CATEGORIES:
-			return Object.assign({}, state, {
-				isFetching: true
-			});
-		case RECEIVE_CATEGORIES:
-			return Object.assign({}, state, {
-				isFetching: false,
-				items: action.items,
-				lastUpdated: action.receivedAt
-			});
-		default:
-			return state;
-	}
+import { updateObject, createReducer, initialDataState } from './reducerUtilites';
+
+const requestCategories = (state) => {
+	return updateObject(state, {
+		isFetching: true
+	});
 };
+
+const receiveCategories = (state, action) => {
+	const receivedCategories = {
+		isFetching: false,
+		items: action.items,
+		lastUpdated: action.receivedAt
+	};
+	return updateObject(state, receivedCategories);
+};
+
+const categories = createReducer(initialDataState, {
+	[REQUEST_CATEGORIES]: requestCategories,
+	[RECEIVE_CATEGORIES]: receiveCategories
+});
 
 export {
 	categories
