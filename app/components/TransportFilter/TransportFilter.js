@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-const {  StyleSheet, View, Text, Picker, StatusBar, TouchableOpacity } = require('react-native');
+const { StyleSheet, View, Text, Picker, StatusBar, TouchableOpacity, ScrollView, KeyboardAvoidingView } = require('react-native');
 
 import { globalStyles } from '../../styles/variables';
 import { AveragePrice } from './AveragePrice';
 
-import { CategoryFilter, BodyStyleFilter, MarkFilter, ModelFilter } from './filters';
+import { CategoryFilter, BodyStyleFilter, MarkFilter, ModelFilter, YearRange } from './filters';
 
 class TransportFilter extends Component {
 	constructor(props) {
@@ -25,26 +25,28 @@ class TransportFilter extends Component {
 		const { price } = this.props;
 
 		return (
-      <View style={styles.container}>
-				<StatusBar barStyle="light-content"/>
-        <Text style={styles.title}>Выберите тип транспорта</Text>
+      <ScrollView style={styles.container}>
+				<KeyboardAvoidingView>
+					<StatusBar barStyle="light-content"/>
+					<Text style={styles.title}>Выберите тип транспорта</Text>
 
-				<CategoryFilter/>
-				<BodyStyleFilter/>
-				<MarkFilter/>
-				<ModelFilter/>
+					<CategoryFilter/>
+					<BodyStyleFilter/>
+					<MarkFilter/>
+					<ModelFilter/>
+					<YearRange/>
 
-				<View >
-					<TouchableOpacity
-						onPress={() => this.getAveragePrice()}
-						style={styles.button}>
-						<Text style={styles.buttonText}>Узнать среднюю строимость</Text>
-					</TouchableOpacity>
-				</View>
+					<View >
+						<TouchableOpacity
+							onPress={() => this.getAveragePrice()}
+							style={styles.button}>
+							<Text style={styles.buttonText}>Узнать среднюю строимость</Text>
+						</TouchableOpacity>
+					</View>
 
-				<AveragePrice price={price} show={!this.state.isFirstAttempt}/>
-
-      </View>
+					<AveragePrice price={price} show={!this.state.isFirstAttempt}/>
+				</KeyboardAvoidingView>
+      </ScrollView>
 		)
 	}
 }
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 15,
-    backgroundColor: globalStyles.colors.greyXXL,
+    backgroundColor: globalStyles.colors.primaryBG,
   },
 	title: {
   	paddingVertical: 20,

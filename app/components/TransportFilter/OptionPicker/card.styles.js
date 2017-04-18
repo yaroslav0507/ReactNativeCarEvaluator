@@ -4,12 +4,13 @@ import { globalStyles } from '../../../styles/variables';
 export const cardStyles = StyleSheet.create({
 	card: {
 		flex: 1,
-		backgroundColor: globalStyles.colors.greyXL,
+		height: 60,
+		backgroundColor: globalStyles.colors.secondaryBG,
 		borderRadius: 50,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',
-		paddingLeft: 60,
+		paddingLeft: 50,
 		paddingRight: 25,
 		marginBottom: 10
 	},
