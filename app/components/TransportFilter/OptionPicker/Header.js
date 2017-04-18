@@ -1,27 +1,32 @@
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text, Platform } from 'react-native';
+import { globalStyles } from '../../../styles/variables';
+import { CustomStatusBar } from '../../CustomStatusBar';
 
 export class Header extends Component {
   render() {
   	const { onLeftButtonPress, title, onRightButtonPress } = this.props;
     return (
-			<View style={styles.header}>
-				<TouchableOpacity
-					onPress={() => {onLeftButtonPress()}}
-					style={styles.back}>
-					<Icon name="ios-arrow-back"
-								size={25}
-								color="#FFF"/>
-				</TouchableOpacity>
-				<Text style={styles.title}>{title}</Text>
-				<TouchableOpacity
-					onPress={() => {onRightButtonPress()}}
-					style={styles.dismiss}>
-					<Icon name="ios-trash-outline"
-								size={25}
-								color="#FFF"/>
-				</TouchableOpacity>
+    	<View>
+				<CustomStatusBar/>
+				<View style={styles.header}>
+					<TouchableOpacity
+						onPress={() => {onLeftButtonPress()}}
+						style={styles.back}>
+						<Icon name="ios-arrow-back"
+									size={25}
+									color="#FFF"/>
+					</TouchableOpacity>
+					<Text style={styles.title}>{title}</Text>
+					<TouchableOpacity
+						onPress={() => {onRightButtonPress()}}
+						style={styles.dismiss}>
+						<Icon name="ios-trash-outline"
+									size={25}
+									color="#FFF"/>
+					</TouchableOpacity>
+				</View>
 			</View>
     )
   }
@@ -29,7 +34,8 @@ export class Header extends Component {
 
 const styles = StyleSheet.create({
 	header: {
-		height: 44,
+		position: 'relative',
+		height: globalStyles.APP_BAR_HEIGHT,
 		borderBottomWidth: 1,
 		backgroundColor: '#2c3e50',
 		borderBottomColor: '#34495e',

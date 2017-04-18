@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, TextInput, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
+import { CustomStatusBar } from './components/CustomStatusBar';
 import { AppNavigator } from './AppNavigator';
 
 export class App extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <CustomStatusBar/>
         <AppNavigator/>
       </View>
     )

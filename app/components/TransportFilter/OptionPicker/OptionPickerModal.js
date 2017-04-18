@@ -3,6 +3,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { StyleSheet, View, Modal, TouchableOpacity, Text, ListView } from 'react-native';
 
 import { Header } from './Header';
+import { SearchBox } from '../SearchBox/SearchBox';
 
 export class OptionPickerModal extends Component {
 	constructor(props) {
@@ -43,6 +44,7 @@ export class OptionPickerModal extends Component {
 					onRightButtonPress={clearSelection}/>
 
 				<View style={styles.modal}>
+					<SearchBox/>
 
 					<ListView
 						key={selectedItem}

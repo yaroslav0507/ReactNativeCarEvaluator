@@ -25,6 +25,8 @@ export class RangePicker extends Component {
 		let valueFrom;
 
 		if (this.valueFitsTheRange(value)) {
+			valueFrom = value;
+
 			this.setState({
 				rangeFrom: value,
 				rangeExceededFrom: false
@@ -33,7 +35,6 @@ export class RangePicker extends Component {
 			const reverseOrderError = this.state.rangeTo && (value > this.state.rangeTo);
 			this.setState({ reverseOrderError });
 
-			valueFrom = value;
 		} else {
 			valueFrom = null;
 			this.setState({ rangeExceededFrom: (value.length !== 0) });
@@ -46,6 +47,8 @@ export class RangePicker extends Component {
 		let valueTo;
 
 		if (this.valueFitsTheRange(value)) {
+			valueTo = value;
+
 			this.setState({
 				rangeTo: value,
 				rangeExceededTo: false,
@@ -54,7 +57,6 @@ export class RangePicker extends Component {
 			const reverseOrderError = this.state.rangeFrom && (value < this.state.rangeFrom);
 			this.setState({ reverseOrderError });
 
-			valueTo = value;
 		} else {
 			this.setState({ rangeExceededTo: (value.length !== 0) });
 		}

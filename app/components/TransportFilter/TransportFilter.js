@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-const { StyleSheet, View, Text, Picker, StatusBar, TouchableOpacity, ScrollView, KeyboardAvoidingView } = require('react-native');
+const { StyleSheet, View, Text, TouchableOpacity, ScrollView, KeyboardAvoidingView } = require('react-native');
 
 import { globalStyles } from '../../styles/variables';
 import { AveragePrice } from './AveragePrice';
@@ -37,9 +37,7 @@ class TransportFilter extends Component {
 		return (
       <ScrollView style={styles.container}>
 				<KeyboardAvoidingView>
-					<StatusBar barStyle="light-content"/>
 					<Text style={styles.title}>Выберите тип транспорта</Text>
-
 					<CategoryFilter/>
 					<BodyStyleFilter/>
 					<MarkFilter/>
@@ -74,7 +72,7 @@ const styles = StyleSheet.create({
     backgroundColor: globalStyles.colors.primaryBG
   },
 	title: {
-  	paddingVertical: 20,
+  	paddingBottom: 15,
 		fontSize: 16,
 		textAlign: 'center',
 		color: '#FFF'
