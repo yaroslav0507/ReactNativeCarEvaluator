@@ -9,23 +9,52 @@ export class RangePicker extends Component {
 		super(props);
 
 		this.state = {
-			rangeFrom: props.minValue,
-			rangeTo: props.maxValue,
+			rangeFrom: null,
+			rangeTo: null,
 			rangeExceededFrom: false,
 			rangeExceededTo: false,
 		}
 	}
 
-	isRangeExceededFrom(bool) {
-		this.setState({
-			rangeExceededFrom: bool
-		})
+	valueFitsTheRange(value) {
+		const { minValue, maxValue, maxLength } = this.props;
+		return value.length === maxLength && value >= minValue && value <= maxValue
 	}
 
-	isRangeExceededTo(bool) {
-		this.setState({
-			rangeExceededTo: bool
-		})
+	onChangeValueFrom(value) {
+		if (this.valueFitsTheRange(value)) {
+			this.setState({
+				rangeFrom: value,
+				rangeExceededFrom: false
+			});
+
+			this.state.rangeTo && (value > this.state.rangeTo)
+				? this.setState({ reverseOrderError: true })
+				: this.setState({ reverseOrderError: false });
+
+			this.props.onChangeRangeFrom(value);
+		} else {
+			this.setState({ rangeExceededFrom: true })
+		}
+	}
+
+	onChangeValueTo(value) {
+		if (this.valueFitsTheRange(value)) {
+			if (value > this.state.rangeFrom) {
+				this.setState({
+					rangeTo: value,
+					rangeExceededTo: false,
+					reverseOrderError: false
+				});
+				this.props.onChangeRangeTo(value);
+			} else {
+				this.setState({
+					reverseOrderError: true
+				})
+			}
+		} else {
+			this.setState({ rangeExceededTo: true })
+		}
 	}
 
   render() {
@@ -33,14 +62,13 @@ export class RangePicker extends Component {
   		iconNameFrom,
 			iconNameTo,
 			iconColor,
-			minValue,
-			maxValue,
 			titleFrom,
-			titleTo
+			titleTo,
+			maxLength
   	} = this.props;
 
-		const rangeFromErrorStyle = this.state.rangeExceededFrom ? styles.rangeError : {};
-		const rangeToErrorStyle = this.state.rangeExceededTo ? styles.rangeError : {};
+		const rangeFromErrorStyle = this.state.rangeExceededFrom || this.state.reverseOrderError ? styles.rangeError : {};
+		const rangeToErrorStyle = this.state.rangeExceededTo || this.state.reverseOrderError ? styles.rangeError : {};
 
 		return (
     	<View style={styles.container}>
@@ -56,13 +84,10 @@ export class RangePicker extends Component {
 						<NumberInput
 							style={[cardStyles.value, styles.rangeInput]}
 							placeholder={titleFrom}
-							maxLength={4}
+							maxLength={maxLength}
 							onSubmitEditing={() => this.rangeInputTo.focus()}
-							onChangeText={(rangeFrom) => this.setState({rangeFrom})}
-							reference={input => this.rangeInputFrom = input}
-							isRangeExceeded={this.isRangeExceededFrom.bind(this)}
-							minValue={minValue}
-							maxValue={maxValue}/>
+							onChangeText={this.onChangeValueFrom.bind(this)}
+							reference={input => this.rangeInputFrom = input}/>
 
 					</TouchableOpacity>
 				</View>
@@ -78,12 +103,9 @@ export class RangePicker extends Component {
 						<NumberInput
 							style={[cardStyles.value, styles.rangeInput]}
 							placeholder={titleTo}
-							maxLength={4}
-							onChangeText={(rangeTo) => this.setState({rangeTo})}
-							reference={input => this.rangeInputTo = input}
-							isRangeExceeded={this.isRangeExceededTo.bind(this)}
-							minValue={minValue}
-							maxValue={maxValue}/>
+							maxLength={maxLength}
+							onChangeText={this.onChangeValueTo.bind(this)}
+							reference={input => this.rangeInputTo = input}/>
 
 					</TouchableOpacity>
 				</View>
@@ -116,6 +138,6 @@ const styles = StyleSheet.create({
 	},
 	rangeError: {
 		borderWidth: 1,
-		borderColor: 'red'
+		borderColor: '#c0392b'
 	}
 });

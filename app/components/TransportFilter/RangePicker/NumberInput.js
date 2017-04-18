@@ -6,18 +6,8 @@ export class NumberInput extends Component {
 		super(props);
 	}
 
-	onValueChanged(rangeValue) {
-		const { minValue, maxValue, maxLength, onChangeText, isRangeExceeded } = this.props;
-		if (rangeValue.length === maxLength && rangeValue >= minValue && rangeValue <= maxValue) {
-			onChangeText(rangeValue);
-			isRangeExceeded(false)
-		} else {
-			isRangeExceeded(true)
-		}
-	}
-
   render() {
-  	const { style, placeholder, onSubmitEditing, maxLength, reference } = this.props;
+  	const { style, placeholder, onChangeText, onSubmitEditing, maxLength, reference } = this.props;
 
     return (
 			<TextInput
@@ -26,7 +16,7 @@ export class NumberInput extends Component {
 				placeholder={placeholder}
 				placeholderTextColor='#929ca6'
 				onSubmitEditing={onSubmitEditing}
-				onChangeText={this.onValueChanged.bind(this)}
+				onChangeText={onChangeText}
 				maxLength={maxLength}
 				ref={reference}/>
     )

@@ -9,6 +9,8 @@ export class YearRange extends Component {
 	}
 
   render() {
+		const { onChangeRangeFrom, onChangeRangeTo } = this.props;
+
     return (
 			<RangePicker
 				iconColor="#9b59b6"
@@ -17,7 +19,10 @@ export class YearRange extends Component {
 				titleFrom="Год от"
 				titleTo="Год до"
 				minValue={1945}
-				maxValue={this.currentYear}/>
+				maxValue={this.currentYear}
+				maxLength={4}
+				onChangeRangeFrom={onChangeRangeFrom}
+				onChangeRangeTo={onChangeRangeTo}/>
     )
   }
 }

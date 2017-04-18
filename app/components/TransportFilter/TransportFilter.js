@@ -10,6 +10,8 @@ class TransportFilter extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			yearFrom: null,
+			yearTo: null,
 			isFirstAttempt: true
 		}
 	}
@@ -19,6 +21,13 @@ class TransportFilter extends Component {
 			isFirstAttempt: false
 		});
 		this.props.onGetAveragePrice();
+	}
+
+	onChangeYearFrom(yearFrom) {
+		this.setState({ yearFrom })
+	}
+	onChangeYearTo(yearTo) {
+		this.setState({ yearTo })
 	}
 
 	render() {
@@ -34,7 +43,9 @@ class TransportFilter extends Component {
 					<BodyStyleFilter/>
 					<MarkFilter/>
 					<ModelFilter/>
-					<YearRange/>
+					<YearRange
+						onChangeRangeFrom={this.onChangeYearFrom.bind(this)}
+						onChangeRangeTo={this.onChangeYearTo.bind(this)}/>
 
 					<View >
 						<TouchableOpacity
