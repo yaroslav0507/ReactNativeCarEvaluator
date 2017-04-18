@@ -11,7 +11,7 @@ const requestMarks = (state, action) => {
 	})
 };
 
-const receiveMarks = (state, actions) => {
+const receiveMarks = (state, action) => {
 	return updateObject(state, {
 		isFetching: false,
 		items: action.items,

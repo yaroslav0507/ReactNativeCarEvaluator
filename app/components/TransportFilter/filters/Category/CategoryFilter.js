@@ -23,7 +23,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onInit: () => {
-			dispatch(fetchCategoriesIfNeeded)
+			dispatch(fetchCategoriesIfNeeded())
 		},
 		onCategorySelected: (category) => {
 			dispatch(selectCategory(category));
