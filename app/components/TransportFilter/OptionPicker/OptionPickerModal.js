@@ -35,7 +35,7 @@ export class OptionPickerModal extends Component {
 				animationType={"slide"}
 				transparent={false}
 				visible={modalVisible}
-				onRequestClose={() => { setModalVisible(!this.state.modalVisible)}}>
+				onRequestClose={() => { setModalVisible(false)}}>
 
 				<Header
 					title={title}

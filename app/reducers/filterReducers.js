@@ -21,7 +21,8 @@ const initialFilters = {
 	category: defaultFilter,
 	bodyStyle: defaultFilter,
 	mark: defaultFilter,
-	model: defaultFilter
+	model: defaultFilter,
+	year: { from: null, to: null}
 };
 
 const selectFilter = (state, action) => {

@@ -32,7 +32,7 @@ class TransportFilter extends Component {
 	}
 
 	render() {
-		const { price } = this.props;
+		const { filters: { year: { from, to }}, price } = this.props;
 
 		return (
       <ScrollView style={styles.container}>
@@ -45,6 +45,8 @@ class TransportFilter extends Component {
 					<MarkFilter/>
 					<ModelFilter/>
 					<YearRange
+						rangeFrom={from}
+						rangeTo={to}
 						onChangeRangeFrom={this.onChangeYearFrom.bind(this)}
 						onChangeRangeTo={this.onChangeYearTo.bind(this)}/>
 
@@ -67,9 +69,9 @@ export { TransportFilter };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+  	flex: 1,
     padding: 15,
-    backgroundColor: globalStyles.colors.primaryBG,
+    backgroundColor: globalStyles.colors.primaryBG
   },
 	title: {
   	paddingVertical: 20,

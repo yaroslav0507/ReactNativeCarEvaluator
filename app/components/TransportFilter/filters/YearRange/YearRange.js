@@ -9,7 +9,7 @@ export class YearRange extends Component {
 	}
 
   render() {
-		const { onChangeRangeFrom, onChangeRangeTo } = this.props;
+		const { rangeFrom, rangeTo, onChangeRangeFrom, onChangeRangeTo } = this.props;
 
     return (
 			<RangePicker
@@ -21,6 +21,8 @@ export class YearRange extends Component {
 				minValue={1940}
 				maxValue={this.maxValue}
 				maxLength={4}
+				rangeFrom={rangeFrom}
+				rangeTo={rangeTo}
 				onChangeRangeFrom={onChangeRangeFrom}
 				onChangeRangeTo={onChangeRangeTo}/>
     )

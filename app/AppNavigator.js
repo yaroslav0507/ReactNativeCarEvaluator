@@ -12,11 +12,11 @@ export class AppNavigator extends Component {
   }
 
   componentDidMount() {
-    BackAndroid.addEventListener('hardwareBackPress', this.handleBackButton)
+    BackAndroid.addEventListener('hardwareBackPress', this.handleBackButton.bind(this))
   }
 
   componentWillUnmount() {
-    BackAndroid.removeEventListener('hardwareBackPress', this.handleBackButton)
+    BackAndroid.removeEventListener('hardwareBackPress', this.handleBackButton.bind(this))
   }
 
   getChildContext() {
@@ -47,10 +47,6 @@ export class AppNavigator extends Component {
       return true;
     }
 
-    if (this.props.tab !== 'schedule') {
-      this.props.dispatch(switchTab('schedule'));
-      return true;
-    }
     return false;
   }
 

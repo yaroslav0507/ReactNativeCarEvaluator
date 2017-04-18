@@ -12,7 +12,7 @@ export class Model extends Component {
 			ModelPicker = (
 				<OptionPicker
 					iconName="ios-star-outline"
-					iconColor="#f1c40f"
+					iconColor="#d35400"
 					title="Модель"
 					list={categoryModels && categoryModels.items}
 					selectedItem={selectedModel}

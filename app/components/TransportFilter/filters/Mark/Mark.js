@@ -12,7 +12,7 @@ export class Mark extends Component {
 			MarkPicker = (
 				<OptionPicker
 					iconName="ios-key-outline"
-					iconColor="#e74c3c"
+					iconColor="#f1c40f"
 					title="Марка"
 					list={categoryMarks && categoryMarks.items}
 					selectedItem={selectedMark}

@@ -9,8 +9,8 @@ export class RangePicker extends Component {
 		super(props);
 
 		this.state = {
-			rangeFrom: null,
-			rangeTo: null,
+			rangeFrom: props.rangeFrom,
+			rangeTo: props.rangeTo,
 			rangeExceededFrom: false,
 			rangeExceededTo: false,
 		}
@@ -71,6 +71,11 @@ export class RangePicker extends Component {
 			maxLength
   	} = this.props;
 
+  	const {
+  		rangeTo,
+			rangeFrom
+		} = this.state;
+
 		const rangeFromErrorStyle = this.state.rangeExceededFrom || this.state.reverseOrderError ? styles.rangeError : {};
 		const rangeToErrorStyle = this.state.rangeExceededTo || this.state.reverseOrderError ? styles.rangeError : {};
 
@@ -85,13 +90,16 @@ export class RangePicker extends Component {
 									size={25}
 									color={iconColor}/>
 
+						<Text style={[styles.rangeTitle, { color: iconColor }]}>{'От'}</Text>
+
 						<NumberInput
 							style={[cardStyles.value, styles.rangeInput]}
 							placeholder={titleFrom}
 							maxLength={maxLength}
 							onSubmitEditing={() => this.rangeInputTo.focus()}
 							onChangeText={this.onChangeValueFrom.bind(this)}
-							reference={input => this.rangeInputFrom = input}/>
+							reference={input => this.rangeInputFrom = input}
+						 	value={rangeFrom}/>
 
 					</TouchableOpacity>
 				</View>
@@ -104,13 +112,15 @@ export class RangePicker extends Component {
 									name={iconNameTo}
 									size={25}
 									color={iconColor}/>
+						<Text style={[styles.rangeTitle, { color: iconColor }]}>{'До'}</Text>
 
 						<NumberInput
 							style={[cardStyles.value, styles.rangeInput]}
 							placeholder={titleTo}
 							maxLength={maxLength}
 							onChangeText={this.onChangeValueTo.bind(this)}
-							reference={input => this.rangeInputTo = input}/>
+							reference={input => this.rangeInputTo = input}
+							value={rangeTo}/>
 
 					</TouchableOpacity>
 				</View>
@@ -132,6 +142,12 @@ const styles = StyleSheet.create({
 	},
 	rangeInput: {
   	textAlign: 'center'
+	},
+	rangeTitle: {
+  	position: 'absolute',
+		fontSize: 10,
+		left: 18,
+		top: 20
 	},
 	leftPicker: {
   	borderTopRightRadius: 0,

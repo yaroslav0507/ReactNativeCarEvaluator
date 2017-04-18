@@ -7,11 +7,12 @@ export class NumberInput extends Component {
 	}
 
   render() {
-  	const { style, placeholder, onChangeText, onSubmitEditing, maxLength, reference } = this.props;
+  	const { value, style, placeholder, onChangeText, onSubmitEditing, maxLength, reference } = this.props;
 
     return (
 			<TextInput
 				style={style}
+				defaultValue={value}
 				keyboardType={'numeric'}
 				placeholder={placeholder}
 				placeholderTextColor='#929ca6'

@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
 	averagePriceContainer: {
 		flex: 1,
 		justifyContent: 'center',
-		alignItems: 'center'
+		alignItems: 'center',
+		paddingTop: 15
 	},
 	averagePriceDescription: {
 		fontSize: 16,
