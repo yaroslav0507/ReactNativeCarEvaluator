@@ -9,6 +9,7 @@ import { CategoryFilter, BodyStyleFilter, MarkFilter, ModelFilter, YearRange } f
 class TransportFilter extends Component {
 	constructor(props) {
 		super(props);
+
 		this.state = {
 			yearFrom: null,
 			yearTo: null,
@@ -20,7 +21,7 @@ class TransportFilter extends Component {
 		this.setState({
 			isFirstAttempt: false
 		});
-		this.props.onGetAveragePrice();
+		this.props.onGetAveragePrice(this.state);
 	}
 
 	onChangeYearFrom(yearFrom) {

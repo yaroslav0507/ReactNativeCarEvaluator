@@ -26,7 +26,9 @@ export const fetchAveragePrice = () => {
 		const categoryID = filters.category.value,
 			bodyStyleID = filters.bodyStyle.value,
 			markID = filters.mark.value,
-			modelID = filters.model.value;
+			modelID = filters.model.value,
+			yearFrom = filters.year.from,
+			yearTo = filters.year.to || new Date().getFullYear();
 
 		const getQueryString = (query, param) => {
 			return param ? `&${query}=${param}` : '';
@@ -39,8 +41,8 @@ export const fetchAveragePrice = () => {
 			getQueryString('model_id[0]', modelID || 0) +
 			getQueryString('state[0]',  0) +
 			getQueryString('gearbox[0]', 0) +
-			getQueryString('s_yers[0]', 0) +
-			getQueryString('po_yers[0]', 0);
+			getQueryString('s_yers[0]', yearFrom || 0) +
+			getQueryString('po_yers[0]', yearTo || 0);
 
 		const descriptionPromise = new Promise((resolve, reject) => {
 			return fetch(descriptionApiRequest)
@@ -55,10 +57,11 @@ export const fetchAveragePrice = () => {
 		const bodyStyle = bodyStyleID ? `&body_id=${bodyStyleID}` : '';
 		const mark = markID ? `&marka_id=${markID}` : '';
 		const model = modelID ? `&model_id=${modelID}` : '';
-
+		const yearStart = yearFrom ? `&yers=${yearFrom}`: '';
+		const yearEnd = yearTo ? `&yers=${yearTo}`: '';
 
 		const averagePricePromise = new Promise((resolve, reject) => {
-			const averagePriceRequest = [category,bodyStyle,mark,model].join('');
+			const averagePriceRequest = [category, bodyStyle, mark, model, yearStart, yearEnd].join('');
 			return fetch(`${priceEngineURL}${averagePriceRequest}`)
 				.then(response => response.json())
 				.then(responseData => {

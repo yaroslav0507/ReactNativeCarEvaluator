@@ -6,7 +6,8 @@ import {
 	SELECT_MARK,
 	CLEAR_MARK,
 	SELECT_MODEL,
-	CLEAR_MODEL
+	CLEAR_MODEL,
+	SELECT_YEAR_RANGE
 } from '../actions/transportFilterActions';
 
 export const selectCategory = (data) => {
@@ -58,5 +59,12 @@ export const selectModel = (data) => {
 export const clearModel = () => {
 	return {
 		type: CLEAR_MODEL
+	}
+};
+
+export const selectYearRange = (data) => {
+	return {
+		type: SELECT_YEAR_RANGE,
+		data
 	}
 };

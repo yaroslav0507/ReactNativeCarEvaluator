@@ -22,39 +22,43 @@ export class RangePicker extends Component {
 	}
 
 	onChangeValueFrom(value) {
+		let valueFrom;
+
 		if (this.valueFitsTheRange(value)) {
 			this.setState({
 				rangeFrom: value,
 				rangeExceededFrom: false
 			});
 
-			this.state.rangeTo && (value > this.state.rangeTo)
-				? this.setState({ reverseOrderError: true })
-				: this.setState({ reverseOrderError: false });
+			const reverseOrderError = this.state.rangeTo && (value > this.state.rangeTo);
+			this.setState({ reverseOrderError });
 
-			this.props.onChangeRangeFrom(value);
+			valueFrom = value;
 		} else {
-			this.setState({ rangeExceededFrom: true })
+			valueFrom = null;
+			this.setState({ rangeExceededFrom: (value.length !== 0) });
 		}
+
+		this.props.onChangeRangeFrom(valueFrom);
 	}
 
 	onChangeValueTo(value) {
+		let valueTo;
+
 		if (this.valueFitsTheRange(value)) {
-			if (value > this.state.rangeFrom) {
-				this.setState({
-					rangeTo: value,
-					rangeExceededTo: false,
-					reverseOrderError: false
-				});
-				this.props.onChangeRangeTo(value);
-			} else {
-				this.setState({
-					reverseOrderError: true
-				})
-			}
+			this.setState({
+				rangeTo: value,
+				rangeExceededTo: false,
+			});
+
+			const reverseOrderError = this.state.rangeFrom && (value < this.state.rangeFrom);
+			this.setState({ reverseOrderError });
+
+			valueTo = value;
 		} else {
-			this.setState({ rangeExceededTo: true })
+			this.setState({ rangeExceededTo: (value.length !== 0) });
 		}
+		this.props.onChangeRangeTo(valueTo);
 	}
 
   render() {
@@ -100,6 +104,7 @@ export class RangePicker extends Component {
 									name={iconNameTo}
 									size={25}
 									color={iconColor}/>
+
 						<NumberInput
 							style={[cardStyles.value, styles.rangeInput]}
 							placeholder={titleTo}

@@ -9,3 +9,5 @@ export const CLEAR_MARK = 'CLEAR_MARK';
 
 export const SELECT_MODEL = 'SELECT_MODEL';
 export const CLEAR_MODEL = 'CLEAR_MODEL';
+
+export const SELECT_YEAR_RANGE = 'SELECT_YEAR_RANGE';

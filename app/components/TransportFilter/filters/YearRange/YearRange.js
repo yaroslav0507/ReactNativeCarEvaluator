@@ -5,7 +5,7 @@ import { RangePicker } from '../../RangePicker/RangePicker';
 export class YearRange extends Component {
 	constructor(props) {
 		super(props);
-		this.currentYear = new Date().getFullYear();
+		this.maxValue = new Date().getFullYear();
 	}
 
   render() {
@@ -18,8 +18,8 @@ export class YearRange extends Component {
 				iconNameTo="ios-calendar-outline"
 				titleFrom="Год от"
 				titleTo="Год до"
-				minValue={1945}
-				maxValue={this.currentYear}
+				minValue={1940}
+				maxValue={this.maxValue}
 				maxLength={4}
 				onChangeRangeFrom={onChangeRangeFrom}
 				onChangeRangeTo={onChangeRangeTo}/>

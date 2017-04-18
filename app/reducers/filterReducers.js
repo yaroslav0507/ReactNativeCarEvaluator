@@ -6,7 +6,8 @@ import {
 	SELECT_MARK,
 	CLEAR_MARK,
 	SELECT_MODEL,
-	CLEAR_MODEL
+	CLEAR_MODEL,
+	SELECT_YEAR_RANGE
 } from '../actions/transportFilterActions';
 
 import { updateObject, createReducer } from './reducerUtilites';
@@ -78,6 +79,16 @@ const clearModel = (state) => {
 	return updateObject(state, { model: defaultFilter })
 };
 
+const selectYearRange = (state, action) => {
+	const { yearFrom, yearTo } = action.data;
+	return updateObject(state, {
+		year: {
+			from: yearFrom,
+			to: yearTo
+		}
+	})
+};
+
 const filters = createReducer(initialFilters, {
 	[SELECT_CATEGORY]: selectCategory,
 	[CLEAR_CATEGORY]: clearCategory,
@@ -86,7 +97,8 @@ const filters = createReducer(initialFilters, {
 	[SELECT_MARK]: selectMark,
 	[CLEAR_MARK]: clearMark,
 	[SELECT_MODEL]: selectModel,
-	[CLEAR_MODEL]: clearModel
+	[CLEAR_MODEL]: clearModel,
+	[SELECT_YEAR_RANGE]: selectYearRange
 });
 
 export {

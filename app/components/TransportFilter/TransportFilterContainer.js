@@ -2,6 +2,7 @@ import { TransportFilter } from './TransportFilter';
 import { connect } from 'react-redux';
 
 import { fetchAveragePrice } from '../../actionCreators/asyncFetchPrices';
+import { selectYearRange } from '../../actionCreators/transportFilterActionCreators';
 
 const mapStateToProps = (state) => {
   return {
@@ -15,7 +16,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
 		onGetAveragePrice: (query) => {
-			dispatch(fetchAveragePrice(query))
+			const { yearFrom, yearTo } = query;
+			dispatch(selectYearRange({ yearFrom, yearTo }));
+			dispatch(fetchAveragePrice())
 		}
   }
 };
