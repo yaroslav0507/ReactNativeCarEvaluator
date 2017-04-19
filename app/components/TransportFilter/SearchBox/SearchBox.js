@@ -4,6 +4,7 @@ import { StyleSheet, View, TextInput } from 'react-native';
 
 export class SearchBox extends Component {
   render() {
+  	const { onChangeText } = this.props;
     return (
       <View style={styles.container}>
 				<View style={styles.inputWrapper}>
@@ -11,7 +12,11 @@ export class SearchBox extends Component {
 								name='ios-search-outline'
 								size={25}
 								color='#FFF'/>
-					<TextInput style={styles.textInput}/>
+					<TextInput
+						style={styles.textInput}
+						autoCorrect={false}
+						underlineColorAndroid='transparent'
+						onChangeText={onChangeText}/>
 				</View>
       </View>
     )
@@ -35,12 +40,12 @@ const styles = StyleSheet.create({
 	textInput: {
 		flex: 1,
 		height: 40,
+		paddingVertical: 0,
 		paddingHorizontal: 40,
 		color: '#FFF'
 	},
 	icon: {
   	position: 'absolute',
-		backgroundColor: '#2c3e50',
 		paddingVertical: 3,
 		paddingLeft: 10,
 		paddingRight: 5,

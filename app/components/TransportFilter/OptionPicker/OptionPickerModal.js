@@ -8,6 +8,26 @@ import { SearchBox } from '../SearchBox/SearchBox';
 export class OptionPickerModal extends Component {
 	constructor(props) {
 		super(props);
+		this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+		this.dataSource = this.ds.cloneWithRows(this.props.dataSource);
+
+		this.state = {
+			dataSource: this.dataSource
+		}
+	}
+
+	handleSearch(query) {
+		this.setState({ searchTerm: query });
+	}
+
+	closeModal() {
+		this.handleSearch(null);
+		this.props.setModalVisible(false);
+	}
+
+	onItemSelected(rowData) {
+		this.handleSearch(null);
+		this.props.onItemSelected(rowData);
 	}
 
 	renderOptionsListRow(rowData) {
@@ -18,7 +38,7 @@ export class OptionPickerModal extends Component {
 		return (
 			<TouchableOpacity
 				style={styles.listRow}
-				onPress={this.props.onItemSelected.bind(this, rowData)}>
+				onPress={() => this.onItemSelected(rowData)}>
 				<Icon
 					style={styles.listIcon}
 					name={iconName}
@@ -29,28 +49,45 @@ export class OptionPickerModal extends Component {
 		)
 	}
 
+	renderSearchBox() {
+		const minCountOfRows = 10;
+
+		return this.props.dataSource.length > minCountOfRows
+			? <SearchBox onChangeText={this.handleSearch.bind(this)}/>
+			: null;
+	}
+
   render() {
-		const { selectedItem, title, modalVisible, setModalVisible, clearSelection } = this.props;
-    return (
+		const { selectedItem, title, modalVisible, clearSelection } = this.props;
+
+		const filteredAssets = this.state.searchTerm
+			? this.props.dataSource.filter(asset => {
+					return asset.name.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) != -1;
+				})
+			: this.props.dataSource;
+		const dataSource = this.ds.cloneWithRows(filteredAssets);
+
+		return (
 			<Modal
 				animationType={"slide"}
 				transparent={false}
 				visible={modalVisible}
-				onRequestClose={() => { setModalVisible(false)}}>
+				onRequestClose={this.closeModal.bind(this)}>
 
 				<Header
 					title={title}
-					onLeftButtonPress={() => setModalVisible(false)}
+					onLeftButtonPress={this.closeModal.bind(this)}
 					onRightButtonPress={clearSelection}/>
 
 				<View style={styles.modal}>
-					<SearchBox/>
+
+					{ this.renderSearchBox() }
 
 					<ListView
 						key={selectedItem}
-						dataSource={this.props.dataSource}
+						dataSource={dataSource}
+						enableEmptySections={true}
 						renderRow={this.renderOptionsListRow.bind(this)} />
-
 				</View>
 			</Modal>
     )
@@ -68,7 +105,8 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 20,
 		borderBottomColor: '#3b4e61',
 		borderBottomWidth: 2,
-		flexDirection: 'row'
+		flexDirection: 'row',
+		alignItems: 'center'
 	},
 	listIcon: {
 		flex: 0,

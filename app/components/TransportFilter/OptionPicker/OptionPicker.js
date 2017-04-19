@@ -7,18 +7,13 @@ import { OptionPickerModal } from './OptionPickerModal';
 export class OptionPicker extends Component {
 	constructor(props) {
 		super(props);
-		this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
 		this.state = {
-			modalVisible: false,
-			dataSource: this.ds.cloneWithRows(this.props.list)
+			modalVisible: false
 		}
 	}
 
 	setModalVisible(visible) {
-		visible && this.setState({
-			dataSource: this.ds.cloneWithRows(this.props.list)
-		});
 		this.setState({modalVisible: visible});
 	}
 
@@ -33,7 +28,7 @@ export class OptionPicker extends Component {
 	}
 
   render() {
-		const { iconName, iconColor, title, selectedItem } = this.props;
+		const { list, iconName, iconColor, title, selectedItem } = this.props;
 		return (
     	<View style={styles.container}>
 				<TouchableOpacity style={cardStyles.card}
@@ -49,12 +44,12 @@ export class OptionPicker extends Component {
 
 				<OptionPickerModal
 					title={title}
-					dataSource={this.state.dataSource}
+					dataSource={list}
 					modalVisible={this.state.modalVisible}
 					selectedItem={selectedItem.value}
-					onItemSelected={(rowData) => this.onItemSelected(rowData)}
-					setModalVisible={(boolean) => this.setModalVisible(boolean)}
-					clearSelection={() => this.clearSelection()}
+					onItemSelected={this.onItemSelected.bind(this)}
+					setModalVisible={this.setModalVisible.bind(this)}
+					clearSelection={this.clearSelection.bind(this)}
 				/>
 			</View>
     )

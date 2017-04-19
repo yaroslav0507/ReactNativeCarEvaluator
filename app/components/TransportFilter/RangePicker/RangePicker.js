@@ -85,7 +85,7 @@ export class RangePicker extends Component {
     	<View style={styles.container}>
 				<View style={styles.rangeField}>
 					<TouchableOpacity
-						style={[cardStyles.card, styles.leftPicker, rangeFromErrorStyle]}
+						style={[cardStyles.card, styles.rangePicker, styles.leftPicker, rangeFromErrorStyle]}
 						onPress={() => { this.rangeInputFrom.focus()}}>
 						<Icon style={cardStyles.icon}
 									name={iconNameFrom}
@@ -108,7 +108,7 @@ export class RangePicker extends Component {
 
 				<View style={styles.rangeField}>
 					<TouchableOpacity
-						style={[cardStyles.card, styles.rightPicker, rangeToErrorStyle]}
+						style={[cardStyles.card, styles.rangePicker, styles.rightPicker, rangeToErrorStyle]}
 						onPress={() => { this.rangeInputTo.focus()}}>
 						<Icon style={cardStyles.icon}
 									name={iconNameTo}
@@ -149,7 +149,12 @@ const styles = StyleSheet.create({
   	position: 'absolute',
 		fontSize: 10,
 		left: 18,
-		top: 20
+		top: 19,
+		backgroundColor: 'transparent'
+	},
+	rangePicker: {
+  	borderWidth: 1,
+		borderColor: 'transparent'
 	},
 	leftPicker: {
   	borderTopRightRadius: 0,
