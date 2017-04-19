@@ -34,7 +34,8 @@ export const fetchAveragePrice = () => {
 			yearFrom = filters.year.from || defaultYearFrom,
 			yearTo = filters.year.to || defaultYearTo,
 			mileageFrom = filters.mileage.from || defaultMileageFrom,
-			mileageTo = filters.mileage.to || defaultMileageTo;
+			mileageTo = filters.mileage.to || defaultMileageTo,
+			stateID = filters.state.value;
 
 		const getQueryString = (query, param) => {
 			return param ? `&${query}=${param}` : '';
@@ -45,7 +46,7 @@ export const fetchAveragePrice = () => {
 			getQueryString('bodystyle[0]', bodyStyleID || 0) +
 			getQueryString('marka_id[0]', markID || 0) +
 			getQueryString('model_id[0]', modelID || 0) +
-			getQueryString('state[0]',  0) +
+			getQueryString('state[0]',  stateID || 0) +
 			getQueryString('gearbox[0]', 0) +
 			getQueryString('s_yers[0]', yearFrom) +
 			getQueryString('po_yers[0]', yearTo) +
@@ -65,13 +66,14 @@ export const fetchAveragePrice = () => {
 		const bodyStyle = bodyStyleID ? `&body_id=${bodyStyleID}` : '';
 		const mark = markID ? `&marka_id=${markID}` : '';
 		const model = modelID ? `&model_id=${modelID}` : '';
+		const state = stateID ? `&state_id=${stateID}` : '';
 		const yearStart = yearFrom ? `&yers=${yearFrom}`: defaultYearFrom ? `&yers=${defaultYearFrom}` : '';
 		const yearEnd = yearTo ? `&yers=${yearTo}`: defaultYearTo ? `&yers=${defaultYearTo}` : '';
 		const mileageStart = mileageFrom ? `&raceInt=${mileageFrom}`: defaultMileageFrom ? `&raceInt=${defaultMileageFrom}` : '';
 		const mileageEnd = mileageTo ? `&raceInt=${mileageTo}`: defaultMileageTo ? `&raceInt=${defaultMileageTo}` : '';
 
 		const averagePricePromise = new Promise((resolve, reject) => {
-			const averagePriceRequest = [category, bodyStyle, mark, model, yearStart, yearEnd, mileageStart, mileageEnd].join('');
+			const averagePriceRequest = [category, bodyStyle, mark, model, yearStart, yearEnd, mileageStart, mileageEnd, state].join('');
 			return fetch(`${priceEngineURL}${averagePriceRequest}`)
 				.then(response => response.json())
 				.then(responseData => {

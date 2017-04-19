@@ -53,6 +53,7 @@ export class OptionPicker extends Component {
 								name={iconName}
 								size={25}
 								color={iconColor}/>
+
 					<Text style={cardStyles.title}>{title}</Text>
 					<Text style={cardStyles.value}
 								numberOfLines={1}>{selectedItem.name}</Text>

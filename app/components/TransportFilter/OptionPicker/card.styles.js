@@ -17,7 +17,8 @@ export const cardStyles = StyleSheet.create({
 	icon: {
 		position: 'absolute',
 		left: 15,
-		width: 25
+		width: 25,
+		justifyContent: 'center'
 	},
 	title: {
 		flex:1,

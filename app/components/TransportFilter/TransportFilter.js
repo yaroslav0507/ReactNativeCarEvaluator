@@ -4,7 +4,7 @@ const { StyleSheet, View, Text, TouchableOpacity, ScrollView, KeyboardAvoidingVi
 import { globalStyles } from '../../styles/variables';
 import { AveragePrice } from './AveragePrice';
 
-import { CategoryFilter, BodyStyleFilter, MarkFilter, ModelFilter, YearRange, MileageRange } from './filters';
+import { CategoryFilter, BodyStyleFilter, MarkFilter, ModelFilter, YearRange, MileageRange, StateFilter } from './filters';
 
 class TransportFilter extends Component {
 	constructor(props) {
@@ -65,6 +65,8 @@ class TransportFilter extends Component {
 						onChangeRangeFrom={this.onChangeMileageFrom.bind(this)}
 						onChangeRangeTo={this.onChangeMileageTo.bind(this)}/>
 
+					<StateFilter/>
+
 					<View >
 						<TouchableOpacity
 							onPress={() => this.getAveragePrice()}
@@ -72,10 +74,10 @@ class TransportFilter extends Component {
 							<Text style={styles.buttonText}>Узнать среднюю строимость</Text>
 						</TouchableOpacity>
 					</View>
-
-					<AveragePrice price={price} show={!this.state.isFirstAttempt}/>
 				</KeyboardAvoidingView>
-      </ScrollView>
+				<AveragePrice price={price} show={!this.state.isFirstAttempt}/>
+
+			</ScrollView>
 		)
 	}
 }

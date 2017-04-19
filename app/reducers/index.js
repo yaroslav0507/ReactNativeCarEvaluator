@@ -6,13 +6,15 @@ import { bodyStyles } from './bodyStyleReducers';
 import { price } from './priceReducers';
 import { marks } from './marksReducers';
 import { models } from './modelsReducers';
+import { states } from './statesReducers';
 
 export default combineReducers({
 	data: combineReducers({
 		categories,
 		bodyStyles,
 		marks,
-		models
+		models,
+		states
 	}),
 	filters,
 	price

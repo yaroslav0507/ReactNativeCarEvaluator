@@ -18,30 +18,38 @@ export class RangePicker extends Component {
 
 	valueFitsTheRange(value) {
 		const { minValue, maxValue, maxLength } = this.props;
-		return value.length <= maxLength && value >= minValue && value <= maxValue
+		const digitsCount = (value + '').length;
+		return digitsCount <= maxLength && value >= minValue && value <= maxValue
 	}
 
 	validateRangeField(fieldType, value, cb) {
-		let rangeValue;
+		let rangeValue,
+				reverseOrderError;
 
 		if (this.valueFitsTheRange(value)) {
 			rangeValue = value;
 
 			this.setState({
 				[fieldType]: value,
-				rangeExceededFrom: false
+				rangeExceededFrom: false,
+				rangeExceededTo: false
 			});
 
-			const reverseOrderError = fieldType === 'rangeFrom'
-				? this.state.rangeTo && (value > this.state.rangeTo)
-				: this.state.rangeFrom && (value < this.state.rangeFrom);
+			let equalLength = (this.state.rangeTo + '').length === (this.state.rangeFrom + '').length;
+
+			reverseOrderError = fieldType === 'rangeFrom'
+				? this.state.rangeTo && (value > this.state.rangeTo) && equalLength
+				: this.state.rangeFrom && (value < this.state.rangeFrom) && equalLength;
 
 			this.setState({ reverseOrderError });
 
 		} else {
 			rangeValue = null;
-			this.setState({ rangeExceededFrom: (value.length !== 0) });
+			reverseOrderError = false;
+			const rangeTypeExceeded = fieldType === 'rangeFrom' ? 'rangeExceededFrom' : 'rangeExceededTo';
+			this.setState({ [rangeTypeExceeded]: ((value + '').length !== 0) && value !== 0 });
 		}
+		this.setState({ reverseOrderError });
 		cb(rangeValue)
 	}
 

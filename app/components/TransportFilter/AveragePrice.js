@@ -11,10 +11,11 @@ export class AveragePrice extends Component {
 		let AveragePrice = null;
 
 		if (price && price.average) {
+			const averagePrice = Math.round(price.average).toString();
 			AveragePrice = (
 				<View style={styles.averagePriceContainer}>
 					<Text style={styles.averagePriceValue}>
-						{price.average && '$'} {Math.round(price.average)}
+						$ {averagePrice}
 					</Text>
 					<Text style={styles.averagePriceDescription}>{price.description}</Text>
 				</View>
@@ -39,7 +40,8 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		paddingTop: 5
+		paddingTop: 5,
+		padding: 20,
 	},
 	averagePriceValue: {
 		flex: 2,

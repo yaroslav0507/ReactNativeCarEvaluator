@@ -25,9 +25,9 @@ export class SearchBox extends Component {
 
 const styles = StyleSheet.create({
   container: {
-		height: 50,
-		borderBottomWidth: 1,
-		borderBottomColor: '#3b4e61',
+		height: 52,
+		borderBottomWidth: 2,
+		borderBottomColor: '#2c3e50',
 		padding: 10
   },
 	inputWrapper: {

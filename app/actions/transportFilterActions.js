@@ -12,3 +12,6 @@ export const CLEAR_MODEL = 'CLEAR_MODEL';
 
 export const SELECT_YEAR_RANGE = 'SELECT_YEAR_RANGE';
 export const SELECT_MILEAGE_RANGE = 'SELECT_MILEAGE_RANGE';
+
+export const SELECT_STATE = 'SELECT_STATE';
+export const CLEAR_STATE = 'CLEAR_STATE';

@@ -17,7 +17,7 @@ export class NumberInput extends Component {
 				placeholder={placeholder}
 				placeholderTextColor='#929ca6'
 				onSubmitEditing={onSubmitEditing}
-				onChangeText={onChangeText}
+				onChangeText={(number) => { onChangeText(+number) }}
 				maxLength={maxLength}
 				ref={reference}/>
     )
