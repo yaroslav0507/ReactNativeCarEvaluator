@@ -28,11 +28,11 @@ export class RangePicker extends Component {
 			rangeValue = value;
 
 			this.setState({
-				rangeFrom: value,
+				[fieldType]: value,
 				rangeExceededFrom: false
 			});
 
-			const reverseOrderError = fieldType === 'from'
+			const reverseOrderError = fieldType === 'rangeFrom'
 				? this.state.rangeTo && (value > this.state.rangeTo)
 				: this.state.rangeFrom && (value < this.state.rangeFrom);
 
@@ -46,11 +46,11 @@ export class RangePicker extends Component {
 	}
 
 	onChangeValueFrom(value) {
-		this.validateRangeField('from', value, this.props.onChangeRangeFrom);
+		this.validateRangeField('rangeFrom', value, this.props.onChangeRangeFrom);
 	}
 
 	onChangeValueTo(value) {
-		this.validateRangeField('to', value, this.props.onChangeRangeTo);
+		this.validateRangeField('rangeTo', value, this.props.onChangeRangeTo);
 	}
 
   render() {

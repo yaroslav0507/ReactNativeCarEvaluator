@@ -37,7 +37,7 @@ class TransportFilter extends Component {
 		return (
       <ScrollView style={styles.container}>
 				<KeyboardAvoidingView>
-					<Text style={styles.title}>Выберите тип транспорта</Text>
+					<Text style={styles.title}>Выберите транспорт</Text>
 					<CategoryFilter/>
 					<BodyStyleFilter/>
 					<MarkFilter/>
