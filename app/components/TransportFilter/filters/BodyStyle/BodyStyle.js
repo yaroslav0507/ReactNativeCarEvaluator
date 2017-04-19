@@ -11,7 +11,7 @@ export class BodyStyle extends Component {
 		return (
 			<OptionPicker
 				iconName="ios-bus-outline"
-				iconColor="#2ecc71"
+				iconColor="#2CC990"
 				title="Тип кузова"
 				list={categoryBodyStyles && categoryBodyStyles.items}
 				selectedItem={selectedBodyStyle}

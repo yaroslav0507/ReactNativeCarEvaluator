@@ -24,13 +24,17 @@ export const fetchAveragePrice = () => {
 		const { filters } = getState();
 		const defaultYearFrom = filters.year.to && 1900;
 		const defaultYearTo = filters.year.from && new Date().getFullYear();
+		const defaultMileageFrom = filters.mileage.to && 1;
+		const defaultMileageTo = filters.mileage.from && 1000;
 
 		const categoryID = filters.category.value,
 			bodyStyleID = filters.bodyStyle.value,
 			markID = filters.mark.value,
 			modelID = filters.model.value,
 			yearFrom = filters.year.from || defaultYearFrom,
-			yearTo = filters.year.to || defaultYearTo;
+			yearTo = filters.year.to || defaultYearTo,
+			mileageFrom = filters.mileage.from || defaultMileageFrom,
+			mileageTo = filters.mileage.to || defaultMileageTo;
 
 		const getQueryString = (query, param) => {
 			return param ? `&${query}=${param}` : '';
@@ -44,7 +48,9 @@ export const fetchAveragePrice = () => {
 			getQueryString('state[0]',  0) +
 			getQueryString('gearbox[0]', 0) +
 			getQueryString('s_yers[0]', yearFrom) +
-			getQueryString('po_yers[0]', yearTo);
+			getQueryString('po_yers[0]', yearTo) +
+			getQueryString('raceFrom', mileageFrom) +
+			getQueryString('raceTo', mileageTo);
 
 		const descriptionPromise = new Promise((resolve, reject) => {
 			return fetch(descriptionApiRequest)
@@ -61,9 +67,11 @@ export const fetchAveragePrice = () => {
 		const model = modelID ? `&model_id=${modelID}` : '';
 		const yearStart = yearFrom ? `&yers=${yearFrom}`: defaultYearFrom ? `&yers=${defaultYearFrom}` : '';
 		const yearEnd = yearTo ? `&yers=${yearTo}`: defaultYearTo ? `&yers=${defaultYearTo}` : '';
+		const mileageStart = mileageFrom ? `&raceInt=${mileageFrom}`: defaultMileageFrom ? `&raceInt=${defaultMileageFrom}` : '';
+		const mileageEnd = mileageTo ? `&raceInt=${mileageTo}`: defaultMileageTo ? `&raceInt=${defaultMileageTo}` : '';
 
 		const averagePricePromise = new Promise((resolve, reject) => {
-			const averagePriceRequest = [category, bodyStyle, mark, model, yearStart, yearEnd].join('');
+			const averagePriceRequest = [category, bodyStyle, mark, model, yearStart, yearEnd, mileageStart, mileageEnd].join('');
 			return fetch(`${priceEngineURL}${averagePriceRequest}`)
 				.then(response => response.json())
 				.then(responseData => {

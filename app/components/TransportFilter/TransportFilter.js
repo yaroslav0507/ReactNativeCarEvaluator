@@ -4,7 +4,7 @@ const { StyleSheet, View, Text, TouchableOpacity, ScrollView, KeyboardAvoidingVi
 import { globalStyles } from '../../styles/variables';
 import { AveragePrice } from './AveragePrice';
 
-import { CategoryFilter, BodyStyleFilter, MarkFilter, ModelFilter, YearRange } from './filters';
+import { CategoryFilter, BodyStyleFilter, MarkFilter, ModelFilter, YearRange, MileageRange } from './filters';
 
 class TransportFilter extends Component {
 	constructor(props) {
@@ -13,6 +13,8 @@ class TransportFilter extends Component {
 		this.state = {
 			yearFrom: props.filters.year.from,
 			yearTo: props.filters.year.to,
+			mileageFrom: props.filters.mileage.from,
+			mileageTo: props.filters.mileage.to,
 			isFirstAttempt: true
 		}
 	}
@@ -27,12 +29,21 @@ class TransportFilter extends Component {
 	onChangeYearFrom(yearFrom) {
 		this.setState({ yearFrom })
 	}
+
 	onChangeYearTo(yearTo) {
 		this.setState({ yearTo })
 	}
 
+	onChangeMileageFrom(mileageFrom) {
+		this.setState({ mileageFrom })
+	}
+
+	onChangeMileageTo(mileageTo) {
+		this.setState({ mileageTo })
+	}
+
 	render() {
-		const { filters: { year: { from, to }}, price } = this.props;
+		const { filters: { year, mileage }, price } = this.props;
 
 		return (
       <ScrollView style={styles.container}>
@@ -43,10 +54,16 @@ class TransportFilter extends Component {
 					<MarkFilter/>
 					<ModelFilter/>
 					<YearRange
-						rangeFrom={from}
-						rangeTo={to}
+						rangeFrom={year.from}
+						rangeTo={year.to}
 						onChangeRangeFrom={this.onChangeYearFrom.bind(this)}
 						onChangeRangeTo={this.onChangeYearTo.bind(this)}/>
+
+					<MileageRange
+						rangeFrom={mileage.from}
+						rangeTo={mileage.to}
+						onChangeRangeFrom={this.onChangeMileageFrom.bind(this)}
+						onChangeRangeTo={this.onChangeMileageTo.bind(this)}/>
 
 					<View >
 						<TouchableOpacity

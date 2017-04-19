@@ -39,17 +39,19 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		paddingTop: 15
-	},
-	averagePriceDescription: {
-		fontSize: 16,
-		color: '#bdc3c7',
-		paddingHorizontal: 15,
-		textAlign: 'center'
+		paddingTop: 5
 	},
 	averagePriceValue: {
-		fontSize: 40,
+		flex: 2,
+		fontSize: 30,
 		color: '#bdc3c7'
+	},
+	averagePriceDescription: {
+		flex: 3,
+		fontSize: 14,
+		color: '#bdc3c7',
+		paddingHorizontal: 10,
+		textAlign: 'center'
 	},
 	noResponse: {
 		color: '#FFF',

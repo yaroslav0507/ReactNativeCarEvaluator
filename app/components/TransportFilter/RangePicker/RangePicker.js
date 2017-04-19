@@ -18,7 +18,7 @@ export class RangePicker extends Component {
 
 	valueFitsTheRange(value) {
 		const { minValue, maxValue, maxLength } = this.props;
-		return value.length === maxLength && value >= minValue && value <= maxValue
+		return value.length <= maxLength && value >= minValue && value <= maxValue
 	}
 
 	validateRangeField(fieldType, value, cb) {
@@ -60,7 +60,8 @@ export class RangePicker extends Component {
 			iconColor,
 			titleFrom,
 			titleTo,
-			maxLength
+			maxLength,
+			showIconTitle
   	} = this.props;
 
   	const {
@@ -70,7 +71,7 @@ export class RangePicker extends Component {
 
 		const rangeFromErrorStyle = this.state.rangeExceededFrom || this.state.reverseOrderError ? styles.rangeError : {};
 		const rangeToErrorStyle = this.state.rangeExceededTo || this.state.reverseOrderError ? styles.rangeError : {};
-
+		const displayIconTitle = showIconTitle ? 'flex' : 'none';
 		return (
     	<View style={styles.container}>
 				<View style={styles.rangeField}>
@@ -82,7 +83,7 @@ export class RangePicker extends Component {
 									size={25}
 									color={iconColor}/>
 
-						<Text style={[styles.rangeTitle, { color: iconColor }]}>{'От'}</Text>
+						<Text style={[styles.rangeTitle, { color: iconColor, display: displayIconTitle }]}>{'От'}</Text>
 
 						<NumberInput
 							style={[cardStyles.value, styles.rangeInput]}
@@ -104,7 +105,7 @@ export class RangePicker extends Component {
 									name={iconNameTo}
 									size={25}
 									color={iconColor}/>
-						<Text style={[styles.rangeTitle, { color: iconColor }]}>{'До'}</Text>
+						<Text style={[styles.rangeTitle, { color: iconColor, display: displayIconTitle }]}>{'До'}</Text>
 
 						<NumberInput
 							style={[cardStyles.value, styles.rangeInput]}

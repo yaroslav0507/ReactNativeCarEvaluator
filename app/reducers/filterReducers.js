@@ -7,7 +7,8 @@ import {
 	CLEAR_MARK,
 	SELECT_MODEL,
 	CLEAR_MODEL,
-	SELECT_YEAR_RANGE
+	SELECT_YEAR_RANGE,
+	SELECT_MILEAGE_RANGE
 } from '../actions/transportFilterActions';
 
 import { updateObject, createReducer } from './reducerUtilites';
@@ -17,12 +18,18 @@ const defaultFilter = {
 	value: 0
 };
 
+const defaultRange = {
+	from: null,
+	to: null
+};
+
 const initialFilters = {
 	category: defaultFilter,
 	bodyStyle: defaultFilter,
 	mark: defaultFilter,
 	model: defaultFilter,
-	year: { from: null, to: null}
+	year: defaultRange,
+	mileage: defaultRange,
 };
 
 const selectFilter = (state, action) => {
@@ -90,6 +97,16 @@ const selectYearRange = (state, action) => {
 	})
 };
 
+const selectMileageRange = (state, action) => {
+	const { mileageFrom, mileageTo } = action.data;
+	return updateObject(state, {
+		mileage: {
+			from: mileageFrom,
+			to: mileageTo
+		}
+	})
+};
+
 const filters = createReducer(initialFilters, {
 	[SELECT_CATEGORY]: selectCategory,
 	[CLEAR_CATEGORY]: clearCategory,
@@ -99,7 +116,8 @@ const filters = createReducer(initialFilters, {
 	[CLEAR_MARK]: clearMark,
 	[SELECT_MODEL]: selectModel,
 	[CLEAR_MODEL]: clearModel,
-	[SELECT_YEAR_RANGE]: selectYearRange
+	[SELECT_YEAR_RANGE]: selectYearRange,
+	[SELECT_MILEAGE_RANGE]: selectMileageRange,
 });
 
 export {

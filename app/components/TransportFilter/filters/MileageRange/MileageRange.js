@@ -2,30 +2,24 @@ import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { RangePicker } from '../../RangePicker/RangePicker';
 
-export class YearRange extends Component {
-	constructor(props) {
-		super(props);
-		this.maxValue = new Date().getFullYear();
-	}
-
+export class MileageRange extends Component {
   render() {
 		const { rangeFrom, rangeTo, onChangeRangeFrom, onChangeRangeTo } = this.props;
 
     return (
 			<RangePicker
-				iconColor="#E3C39D"
-				iconNameFrom="ios-calendar-outline"
-				iconNameTo="ios-calendar-outline"
-				titleFrom="Год от"
-				titleTo="Год до"
-				minValue={1940}
-				maxValue={this.maxValue}
-				maxLength={4}
+				iconColor="#64DDBB"
+				iconNameFrom="ios-speedometer-outline"
+				iconNameTo="ios-speedometer-outline"
+				titleFrom="От тыс км"
+				titleTo="До тыс км"
+				minValue={0}
+				maxValue={999}
+				maxLength={3}
 				rangeFrom={rangeFrom}
 				rangeTo={rangeTo}
 				onChangeRangeFrom={onChangeRangeFrom}
-				onChangeRangeTo={onChangeRangeTo}
-				showIconTitle={true}/>
+				onChangeRangeTo={onChangeRangeTo}/>
     )
   }
 }
