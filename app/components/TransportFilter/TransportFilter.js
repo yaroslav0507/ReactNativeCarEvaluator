@@ -11,8 +11,8 @@ class TransportFilter extends Component {
 		super(props);
 
 		this.state = {
-			yearFrom: null,
-			yearTo: null,
+			yearFrom: props.filters.year.from,
+			yearTo: props.filters.year.to,
 			isFirstAttempt: true
 		}
 	}

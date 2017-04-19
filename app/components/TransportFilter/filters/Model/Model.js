@@ -6,20 +6,17 @@ export class Model extends Component {
   render() {
   	const { selectedCategory, selectedMark, selectedModel, models, onModelSelected, onModelCleared } = this.props;
 
-		let ModelPicker = null;
 		let categoryModels = models[selectedCategory.value] && models[selectedCategory.value][selectedMark.value];
-		if (categoryModels && categoryModels.items) {
-			ModelPicker = (
-				<OptionPicker
-					iconName="ios-star-outline"
-					iconColor="#d35400"
-					title="Модель"
-					list={categoryModels && categoryModels.items}
-					selectedItem={selectedModel}
-					onItemSelected={(selectedItem) => onModelSelected(selectedItem)}
-					onClearSelection={() => onModelCleared()}/>
-			)
-		}
-		return ModelPicker
+
+		return (
+			<OptionPicker
+				iconName="ios-star-outline"
+				iconColor="#d35400"
+				title="Модель"
+				list={categoryModels && categoryModels.items}
+				selectedItem={selectedModel}
+				onItemSelected={(selectedItem) => onModelSelected(selectedItem)}
+				onClearSelection={() => onModelCleared()}/>
+		)
   }
 }

@@ -21,46 +21,36 @@ export class RangePicker extends Component {
 		return value.length === maxLength && value >= minValue && value <= maxValue
 	}
 
-	onChangeValueFrom(value) {
-		let valueFrom;
+	validateRangeField(fieldType, value, cb) {
+		let rangeValue;
 
 		if (this.valueFitsTheRange(value)) {
-			valueFrom = value;
+			rangeValue = value;
 
 			this.setState({
 				rangeFrom: value,
 				rangeExceededFrom: false
 			});
 
-			const reverseOrderError = this.state.rangeTo && (value > this.state.rangeTo);
+			const reverseOrderError = fieldType === 'from'
+				? this.state.rangeTo && (value > this.state.rangeTo)
+				: this.state.rangeFrom && (value < this.state.rangeFrom);
+
 			this.setState({ reverseOrderError });
 
 		} else {
-			valueFrom = null;
+			rangeValue = null;
 			this.setState({ rangeExceededFrom: (value.length !== 0) });
 		}
+		cb(rangeValue)
+	}
 
-		this.props.onChangeRangeFrom(valueFrom);
+	onChangeValueFrom(value) {
+		this.validateRangeField('from', value, this.props.onChangeRangeFrom);
 	}
 
 	onChangeValueTo(value) {
-		let valueTo;
-
-		if (this.valueFitsTheRange(value)) {
-			valueTo = value;
-
-			this.setState({
-				rangeTo: value,
-				rangeExceededTo: false,
-			});
-
-			const reverseOrderError = this.state.rangeFrom && (value < this.state.rangeFrom);
-			this.setState({ reverseOrderError });
-
-		} else {
-			this.setState({ rangeExceededTo: (value.length !== 0) });
-		}
-		this.props.onChangeRangeTo(valueTo);
+		this.validateRangeField('to', value, this.props.onChangeRangeTo);
 	}
 
   render() {

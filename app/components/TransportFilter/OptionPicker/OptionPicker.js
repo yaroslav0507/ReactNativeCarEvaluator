@@ -14,7 +14,7 @@ export class OptionPicker extends Component {
 	}
 
 	setModalVisible(visible) {
-		this.setState({modalVisible: visible});
+		this.props.list && this.setState({modalVisible: visible});
 	}
 
 	onItemSelected(rowData) {
@@ -29,9 +29,25 @@ export class OptionPicker extends Component {
 
   render() {
 		const { list, iconName, iconColor, title, selectedItem } = this.props;
+
+		const renderOptionPickerModal = () => {
+			return !list ? null : (
+					<OptionPickerModal
+						title={title}
+						dataSource={list}
+						modalVisible={this.state.modalVisible}
+						selectedItem={selectedItem.value}
+						onItemSelected={this.onItemSelected.bind(this)}
+						setModalVisible={this.setModalVisible.bind(this)}
+						clearSelection={this.clearSelection.bind(this)}
+					/>
+				);
+		};
+
 		return (
-    	<View style={styles.container}>
+    	<View style={[styles.container, !list && styles.disabled]}>
 				<TouchableOpacity style={cardStyles.card}
+													disabled={!list}
 													onPress={() => { this.setModalVisible(true) }}>
 					<Icon style={cardStyles.icon}
 								name={iconName}
@@ -42,15 +58,7 @@ export class OptionPicker extends Component {
 								numberOfLines={1}>{selectedItem.name}</Text>
 				</TouchableOpacity>
 
-				<OptionPickerModal
-					title={title}
-					dataSource={list}
-					modalVisible={this.state.modalVisible}
-					selectedItem={selectedItem.value}
-					onItemSelected={this.onItemSelected.bind(this)}
-					setModalVisible={this.setModalVisible.bind(this)}
-					clearSelection={this.clearSelection.bind(this)}
-				/>
+				{ renderOptionPickerModal() }
 			</View>
     )
   }
@@ -60,5 +68,8 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		height: 60
+	},
+	disabled: {
+		opacity: .3
 	}
 });

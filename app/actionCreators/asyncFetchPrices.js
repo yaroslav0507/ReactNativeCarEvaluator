@@ -67,8 +67,8 @@ export const fetchAveragePrice = () => {
 			return fetch(`${priceEngineURL}${averagePriceRequest}`)
 				.then(response => response.json())
 				.then(responseData => {
-					const { interQuartileMean } = responseData;
-					resolve(interQuartileMean);
+					const { interQuartileMean, arithmeticMean } = responseData;
+					resolve(interQuartileMean || arithmeticMean);
 				})
 				.catch(({message}) => {
 					reject(message);
