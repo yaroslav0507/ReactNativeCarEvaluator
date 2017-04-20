@@ -1,4 +1,4 @@
-import { REQUEST_BODY_STYLES, RECEIVE_BODY_STYLES} from '../actions/asyncFilterActions';
+import { REQUEST_BODY_STYLES, RECEIVE_BODY_STYLES} from '../../actions/asyncFilterActions';
 
 export const requestBodyStyles = (categoryID) => {
 	return {

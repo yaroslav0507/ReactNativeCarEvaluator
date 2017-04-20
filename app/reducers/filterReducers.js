@@ -10,7 +10,11 @@ import {
 	SELECT_YEAR_RANGE,
 	SELECT_MILEAGE_RANGE,
 	SELECT_STATE,
-	CLEAR_STATE
+	CLEAR_STATE,
+	SELECT_GEARBOX,
+	CLEAR_GEARBOX,
+	SELECT_FUEL,
+	CLEAR_FUEL
 } from '../actions/transportFilterActions';
 
 import { updateObject, createReducer } from './reducerUtilites';
@@ -32,7 +36,9 @@ const initialFilters = {
 	model: defaultFilter,
 	year: defaultRange,
 	mileage: defaultRange,
-	state: defaultFilter
+	state: defaultFilter,
+	gearbox: defaultFilter,
+	fuel: defaultFilter
 };
 
 const selectFilter = (state, action) => {
@@ -48,6 +54,8 @@ const filter = createReducer(defaultFilter, {
 	[SELECT_MARK]: selectFilter,
 	[SELECT_MODEL]: selectFilter,
 	[SELECT_STATE]: selectFilter,
+	[SELECT_GEARBOX]: selectFilter,
+	[SELECT_FUEL]: selectFilter,
 });
 
 const selectCategory = (state, action) => {
@@ -99,6 +107,22 @@ const clearState = (state) => {
 	return updateObject(state, { state: defaultFilter })
 };
 
+const selectGearbox = (state, action) => {
+	return updateObject(state, { gearbox: filter(undefined, action) })
+};
+
+const clearGearbox = (state) => {
+	return updateObject(state, { gearbox: defaultFilter })
+};
+
+const selectFuel = (state, action) => {
+	return updateObject(state, { fuel: filter(undefined, action) })
+};
+
+const clearFuel = (state) => {
+	return updateObject(state, { fuel: defaultFilter })
+};
+
 const selectYearRange = (state, action) => {
 	const { yearFrom, yearTo } = action.data;
 	return updateObject(state, {
@@ -131,7 +155,11 @@ const filters = createReducer(initialFilters, {
 	[SELECT_YEAR_RANGE]: selectYearRange,
 	[SELECT_MILEAGE_RANGE]: selectMileageRange,
 	[SELECT_STATE]: selectState,
-	[CLEAR_STATE]: clearState
+	[CLEAR_STATE]: clearState,
+	[SELECT_GEARBOX]: selectGearbox,
+	[CLEAR_GEARBOX]: clearGearbox,
+	[SELECT_FUEL]: selectFuel,
+	[CLEAR_FUEL]: clearFuel
 });
 
 export {

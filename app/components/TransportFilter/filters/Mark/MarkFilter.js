@@ -6,7 +6,7 @@ import {
 	clearModel
 } from '../../../../actionCreators/transportFilterActionCreators';
 
-import { fetchModelsIfNeeded } from '../../../../actionCreators/asyncFetchModels';
+import { fetchModelsIfNeeded } from '../../../../actionCreators/async/asyncFetchModels';
 
 const mapStateToProps = (state) => {
 	return {

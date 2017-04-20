@@ -3,10 +3,6 @@ import { StyleSheet, View } from 'react-native';
 import { OptionPicker } from '../../OptionPicker/OptionPicker';
 
 export class State extends Component {
-	componentDidMount() {
-		this.props.onInit();
-	}
-
   render() {
   	const { states, selectedState, onStateSelected, onStateCleared } = this.props;
 

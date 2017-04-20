@@ -5,8 +5,6 @@ import {
 	clearState
 } from '../../../../actionCreators/transportFilterActionCreators';
 
-import { fetchStatesIfNeeded } from '../../../../actionCreators/asyncFetchStates';
-
 const mapStateToProps = (state) => {
 	return {
 		selectedState: state.filters.state,
@@ -16,9 +14,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onInit: () => {
-			dispatch(fetchStatesIfNeeded())
-		},
 		onStateSelected: (state) => {
 			dispatch(selectState(state));
 		},

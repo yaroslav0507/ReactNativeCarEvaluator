@@ -9,9 +9,8 @@ import {
 	clearModel
 } from '../../../../actionCreators/transportFilterActionCreators';
 
-import { fetchCategoriesIfNeeded } from '../../../../actionCreators/asyncFetchCategories';
-import { fetchBodyStylesIfNeeded } from '../../../../actionCreators/asyncFetchBodyStyles';
-import { fetchMarksIfNeeded } from '../../../../actionCreators/asyncFetchMarks';
+import { fetchBodyStylesIfNeeded } from '../../../../actionCreators/async/asyncFetchBodyStyles';
+import { fetchMarksIfNeeded } from '../../../../actionCreators/async/asyncFetchMarks';
 
 const mapStateToProps = (state) => {
 	return {
@@ -22,9 +21,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onInit: () => {
-			dispatch(fetchCategoriesIfNeeded())
-		},
 		onCategorySelected: (category) => {
 			dispatch(selectCategory(category));
 			dispatch(fetchBodyStylesIfNeeded());

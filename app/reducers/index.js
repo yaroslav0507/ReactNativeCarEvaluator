@@ -1,20 +1,27 @@
 const { combineReducers } = require('redux');
 
-import { filters } from './filterReducers';
-import { categories } from './categoryReducers';
+import {
+	categories,
+	states,
+	fuels,
+	gearboxes
+} from './preloadReducers';
+
 import { bodyStyles } from './bodyStyleReducers';
-import { price } from './priceReducers';
 import { marks } from './marksReducers';
 import { models } from './modelsReducers';
-import { states } from './statesReducers';
+import { filters } from './filterReducers';
+import { price } from './priceReducers';
 
 export default combineReducers({
 	data: combineReducers({
 		categories,
+		states,
+		fuels,
+		gearboxes,
 		bodyStyles,
 		marks,
-		models,
-		states
+		models
 	}),
 	filters,
 	price

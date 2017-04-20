@@ -1,4 +1,4 @@
-import { REQUEST_MARKS, RECEIVE_MARKS} from '../actions/asyncFilterActions';
+import { REQUEST_MARKS, RECEIVE_MARKS} from '../../actions/asyncFilterActions';
 
 export const requestMarks = (categoryID) => {
 	return {

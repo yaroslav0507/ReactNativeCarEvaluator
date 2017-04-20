@@ -15,3 +15,9 @@ export const SELECT_MILEAGE_RANGE = 'SELECT_MILEAGE_RANGE';
 
 export const SELECT_STATE = 'SELECT_STATE';
 export const CLEAR_STATE = 'CLEAR_STATE';
+
+export const SELECT_GEARBOX = 'SELECT_GEARBOX';
+export const CLEAR_GEARBOX = 'CLEAR_GEARBOX';
+
+export const SELECT_FUEL = 'SELECT_FUEL';
+export const CLEAR_FUEL = 'CLEAR_FUEL';

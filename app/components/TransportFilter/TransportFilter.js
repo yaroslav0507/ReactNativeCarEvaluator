@@ -4,7 +4,17 @@ const { StyleSheet, View, Text, TouchableOpacity, ScrollView, KeyboardAvoidingVi
 import { globalStyles } from '../../styles/variables';
 import { AveragePrice } from './AveragePrice';
 
-import { CategoryFilter, BodyStyleFilter, MarkFilter, ModelFilter, YearRange, MileageRange, StateFilter } from './filters';
+import {
+	CategoryFilter,
+	BodyStyleFilter,
+	MarkFilter,
+	ModelFilter,
+	YearRange,
+	MileageRange,
+	StateFilter,
+	GearboxFilter,
+	FuelFilter
+} from './filters';
 
 class TransportFilter extends Component {
 	constructor(props) {
@@ -17,6 +27,10 @@ class TransportFilter extends Component {
 			mileageTo: props.filters.mileage.to,
 			isFirstAttempt: true
 		}
+	}
+
+	componentDidMount() {
+		this.props.onInit();
 	}
 
 	getAveragePrice() {
@@ -53,6 +67,7 @@ class TransportFilter extends Component {
 					<BodyStyleFilter/>
 					<MarkFilter/>
 					<ModelFilter/>
+
 					<YearRange
 						rangeFrom={year.from}
 						rangeTo={year.to}
@@ -66,6 +81,8 @@ class TransportFilter extends Component {
 						onChangeRangeTo={this.onChangeMileageTo.bind(this)}/>
 
 					<StateFilter/>
+					<GearboxFilter/>
+					<FuelFilter/>
 
 					<View >
 						<TouchableOpacity

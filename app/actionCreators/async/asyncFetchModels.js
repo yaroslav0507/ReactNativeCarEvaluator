@@ -1,4 +1,4 @@
-import { REQUEST_MODELS, RECEIVE_MODELS} from '../actions/asyncFilterActions';
+import { REQUEST_MODELS, RECEIVE_MODELS} from '../../actions/asyncFilterActions';
 
 export const requestModels = (categoryID, markID) => {
 	return {

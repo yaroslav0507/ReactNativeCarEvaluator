@@ -1,4 +1,4 @@
-import { REQUEST_AVERAGE_PRICE, RECEIVE_AVERAGE_PRICE } from '../actions/asyncPricesActions';
+import { REQUEST_AVERAGE_PRICE, RECEIVE_AVERAGE_PRICE } from '../../actions/asyncPricesActions';
 
 export const requestAveragePrice = () => {
 	return {
@@ -35,7 +35,9 @@ export const fetchAveragePrice = () => {
 			yearTo = filters.year.to || defaultYearTo,
 			mileageFrom = filters.mileage.from || defaultMileageFrom,
 			mileageTo = filters.mileage.to || defaultMileageTo,
-			stateID = filters.state.value;
+			stateID = filters.state.value,
+			gearboxID = filters.gearbox.value,
+			fuelID = filters.fuel.value;
 
 		const getQueryString = (query, param) => {
 			return param ? `&${query}=${param}` : '';
@@ -47,7 +49,8 @@ export const fetchAveragePrice = () => {
 			getQueryString('marka_id[0]', markID || 0) +
 			getQueryString('model_id[0]', modelID || 0) +
 			getQueryString('state[0]',  stateID || 0) +
-			getQueryString('gearbox[0]', 0) +
+			getQueryString('gearbox[0]', gearboxID || 0) +
+			getQueryString('type[0]', fuelID || 0) +
 			getQueryString('s_yers[0]', yearFrom) +
 			getQueryString('po_yers[0]', yearTo) +
 			getQueryString('raceFrom', mileageFrom) +
@@ -67,13 +70,15 @@ export const fetchAveragePrice = () => {
 		const mark = markID ? `&marka_id=${markID}` : '';
 		const model = modelID ? `&model_id=${modelID}` : '';
 		const state = stateID ? `&state_id=${stateID}` : '';
+		const gearbox = gearboxID ? `&gear_id=${gearboxID}` : '';
+		const fuel = fuelID ? `&fuel_id=${fuelID}` : '';
 		const yearStart = yearFrom ? `&yers=${yearFrom}`: defaultYearFrom ? `&yers=${defaultYearFrom}` : '';
 		const yearEnd = yearTo ? `&yers=${yearTo}`: defaultYearTo ? `&yers=${defaultYearTo}` : '';
 		const mileageStart = mileageFrom ? `&raceInt=${mileageFrom}`: defaultMileageFrom ? `&raceInt=${defaultMileageFrom}` : '';
 		const mileageEnd = mileageTo ? `&raceInt=${mileageTo}`: defaultMileageTo ? `&raceInt=${defaultMileageTo}` : '';
 
 		const averagePricePromise = new Promise((resolve, reject) => {
-			const averagePriceRequest = [category, bodyStyle, mark, model, yearStart, yearEnd, mileageStart, mileageEnd, state].join('');
+			const averagePriceRequest = [category, bodyStyle, mark, model, yearStart, yearEnd, mileageStart, mileageEnd, state, gearbox, fuel].join('');
 			return fetch(`${priceEngineURL}${averagePriceRequest}`)
 				.then(response => response.json())
 				.then(responseData => {
