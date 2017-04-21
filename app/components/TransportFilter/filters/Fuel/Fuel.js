@@ -9,7 +9,7 @@ export class Fuel extends Component {
     return (
 			<OptionPicker
 				iconName="ios-water-outline"
-				iconColor="#2CC990"
+				iconColor="#FEC606"
 				title="Топливо"
 				list={fuels.items}
 				selectedItem={selectedFuel}

@@ -72,7 +72,9 @@ export class OptionPicker extends Component {
 													disabled={!list}
 													onPress={() => { this.setModalVisible(true) }}>
 
-					{renderIcon()}
+					<View style={cardStyles.iconWrapper}>
+						{renderIcon()}
+					</View>
 
 					<Text style={cardStyles.title}>{title}</Text>
 					<Text style={cardStyles.value}

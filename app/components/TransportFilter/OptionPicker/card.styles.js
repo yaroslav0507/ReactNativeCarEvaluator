@@ -14,10 +14,14 @@ export const cardStyles = StyleSheet.create({
 		paddingRight: 25,
 		marginBottom: 10
 	},
-	icon: {
+	iconWrapper: {
 		position: 'absolute',
+		alignItems: 'center',
 		left: 15,
-		width: 25,
+		width: 25
+	},
+	icon: {
+		position: 'relative',
 		justifyContent: 'center'
 	},
 	title: {

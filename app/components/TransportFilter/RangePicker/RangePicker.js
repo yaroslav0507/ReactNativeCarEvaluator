@@ -86,10 +86,13 @@ export class RangePicker extends Component {
 					<TouchableOpacity
 						style={[cardStyles.card, styles.rangePicker, styles.leftPicker, rangeFromErrorStyle]}
 						onPress={() => { this.rangeInputFrom.focus()}}>
-						<Icon style={cardStyles.icon}
-									name={iconNameFrom}
-									size={25}
-									color={iconColor}/>
+
+						<View style={cardStyles.iconWrapper}>
+							<Icon style={cardStyles.icon}
+										name={iconNameFrom}
+										size={25}
+										color={iconColor}/>
+						</View>
 
 						<Text style={[styles.rangeTitle, { color: iconColor, display: displayIconTitle }]}>{'От'}</Text>
 
@@ -109,10 +112,14 @@ export class RangePicker extends Component {
 					<TouchableOpacity
 						style={[cardStyles.card, styles.rangePicker, styles.rightPicker, rangeToErrorStyle]}
 						onPress={() => { this.rangeInputTo.focus()}}>
-						<Icon style={cardStyles.icon}
-									name={iconNameTo}
-									size={25}
-									color={iconColor}/>
+
+						<View style={cardStyles.iconWrapper}>
+							<Icon style={cardStyles.icon}
+										name={iconNameTo}
+										size={25}
+										color={iconColor}/>
+						</View>
+
 						<Text style={[styles.rangeTitle, { color: iconColor, display: displayIconTitle }]}>{'До'}</Text>
 
 						<NumberInput
@@ -147,7 +154,7 @@ const styles = StyleSheet.create({
 	rangeTitle: {
   	position: 'absolute',
 		fontSize: 10,
-		left: 18,
+		left: 21,
 		top: 19,
 		backgroundColor: 'transparent'
 	},

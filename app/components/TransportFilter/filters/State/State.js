@@ -9,7 +9,7 @@ export class State extends Component {
     return (
 			<OptionPicker
 				iconName="ios-pin-outline"
-				iconColor="#E7F76D"
+				iconColor="#EBF680"
 				title="Область"
 				list={states.items}
 				selectedItem={selectedState}

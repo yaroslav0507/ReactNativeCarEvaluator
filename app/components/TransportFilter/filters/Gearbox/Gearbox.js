@@ -10,7 +10,7 @@ export class Gearbox extends Component {
 			<OptionPicker
 				iconName="gear"
 				iconFont="EvilIcons"
-				iconColor="#2CC990"
+				iconColor="#5BC0DE"
 				title="КПП"
 				list={gearboxes.items}
 				selectedItem={selectedGearbox}
