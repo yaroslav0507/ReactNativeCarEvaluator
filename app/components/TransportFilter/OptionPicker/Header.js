@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { StyleSheet, View, TouchableOpacity, Text, Platform } from 'react-native';
 import { globalStyles } from '../../../styles/variables';
-import { CustomStatusBar } from '../../CustomStatusBar';
+import { CustomStatusBar } from '../../shared/CustomStatusBar';
 
 export class Header extends Component {
   render() {

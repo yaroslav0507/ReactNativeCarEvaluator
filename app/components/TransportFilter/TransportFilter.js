@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-const { StyleSheet, View, Text, TouchableOpacity, ScrollView, KeyboardAvoidingView } = require('react-native');
-
-import { globalStyles } from '../../styles/variables';
-import { AveragePrice } from './AveragePrice';
+const { View, Text, TouchableOpacity, ScrollView, KeyboardAvoidingView } = require('react-native');
+import { viewStyles } from '../shared/view.styles';
 
 import {
 	CategoryFilter,
@@ -17,6 +15,10 @@ import {
 } from './filters';
 
 class TransportFilter extends Component {
+	static navigationOptions = {
+		title: 'Фильтры'
+	};
+
 	constructor(props) {
 		super(props);
 
@@ -34,10 +36,8 @@ class TransportFilter extends Component {
 	}
 
 	getAveragePrice() {
-		this.setState({
-			isFirstAttempt: false
-		});
 		this.props.onGetAveragePrice(this.state);
+		this.props.navigate('Results');
 	}
 
 	onChangeYearFrom(yearFrom) {
@@ -57,12 +57,11 @@ class TransportFilter extends Component {
 	}
 
 	render() {
-		const { filters: { year, mileage }, price } = this.props;
+		const { filters: { year, mileage },  } = this.props;
 
 		return (
-      <ScrollView style={styles.container}>
+      <ScrollView style={viewStyles.container} renderToHardwareTextureAndroid={true}>
 				<KeyboardAvoidingView>
-					<Text style={styles.title}>Выберите транспорт</Text>
 					<CategoryFilter/>
 					<BodyStyleFilter/>
 					<MarkFilter/>
@@ -87,12 +86,12 @@ class TransportFilter extends Component {
 					<View >
 						<TouchableOpacity
 							onPress={() => this.getAveragePrice()}
-							style={styles.button}>
-							<Text style={styles.buttonText}>Узнать среднюю строимость</Text>
+							style={viewStyles.button}>
+							<Text style={viewStyles.buttonText}>Узнать среднюю строимость</Text>
 						</TouchableOpacity>
 					</View>
+
 				</KeyboardAvoidingView>
-				<AveragePrice price={price} show={!this.state.isFirstAttempt}/>
 
 			</ScrollView>
 		)
@@ -100,30 +99,6 @@ class TransportFilter extends Component {
 }
 
 export { TransportFilter };
-
-const styles = StyleSheet.create({
-  container: {
-  	flex: 1,
-    padding: 15,
-    backgroundColor: globalStyles.colors.primaryBG
-  },
-	title: {
-  	paddingBottom: 15,
-		fontSize: 16,
-		textAlign: 'center',
-		color: '#FFF'
-	},
-  button: {
-    backgroundColor: '#27ae60',
-    padding: 15,
-		borderRadius: 50
-  },
-  buttonText: {
-    textAlign: 'center',
-    color: '#FFF',
-    fontWeight: '700'
-  }
-});
 
 
 

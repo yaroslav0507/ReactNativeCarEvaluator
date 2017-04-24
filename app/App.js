@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, StatusBar } from 'react-native';
 
-import { CustomStatusBar } from './components/CustomStatusBar';
 import { AppNavigator } from './AppNavigator';
+import { globalStyles } from './styles/variables';
 
 export class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <CustomStatusBar/>
-        <AppNavigator/>
+        <StatusBar barStyle="light-content"/>
+        <AppNavigator style={styles.navigatorStyle}/>
       </View>
     )
   }
@@ -17,6 +17,10 @@ export class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: globalStyles.primaryBG
   },
+  navigatorStyle: {
+    backgroundColor: '#000'
+  }
 });

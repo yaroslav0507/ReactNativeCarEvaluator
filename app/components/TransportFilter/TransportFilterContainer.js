@@ -8,17 +8,15 @@ import {
 	fetchFuelsIfNeeded
 } from '../../actionCreators/preloadActions';
 
-import { fetchAveragePrice } from '../../actionCreators/async/asyncFetchPrices';
 import { selectYearRange, selectMileageRange } from '../../actionCreators/transportFilterActionCreators';
 
 const mapStateToProps = (state) => {
   return {
-		filters: state.filters,
-		price: state.price,
+		filters: state.filters
   }
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
   	onInit: () => {
 			dispatch(fetchCategoriesIfNeeded());
@@ -30,7 +28,9 @@ const mapDispatchToProps = (dispatch) => {
 			const { yearFrom, yearTo, mileageFrom, mileageTo } = query;
 			dispatch(selectYearRange({ yearFrom, yearTo }));
 			dispatch(selectMileageRange({ mileageFrom, mileageTo }));
-			dispatch(fetchAveragePrice())
+		},
+		navigate: (route) => {
+  		ownProps.navigation.navigate(route)
 		}
   }
 };

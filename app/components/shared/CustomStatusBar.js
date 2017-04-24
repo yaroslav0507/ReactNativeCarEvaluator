@@ -1,14 +1,14 @@
 import React, {
 	Component,
 } from 'react';
+
 import {
-	AppRegistry,
 	StyleSheet,
 	View,
 	StatusBar
 } from 'react-native';
 
-import { globalStyles } from '../styles/variables';
+import { globalStyles } from '../../styles/variables';
 
 const NativeStatusBarWrapper = ({backgroundColor, ...props}) => (
 	<View style={[styles.statusBar, { backgroundColor }]}>
