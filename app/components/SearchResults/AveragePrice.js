@@ -10,16 +10,38 @@ export class AveragePrice extends Component {
 		const { price } = this.props;
 		let AveragePrice = null;
 
-		if (price && price.average) {
+		if (price && price.average && price.exchangeRates) {
 			const averagePrice = Math.round(price.average).toString();
+			const eurRate = price.exchangeRates.eur.ask;
+			const usdRate = price.exchangeRates.usd.ask;
+
+			const priceInEUR = Math.round(price.average * usdRate / eurRate).toString();
+			const priceInUAH = Math.round(price.average * usdRate).toString();
+
 			AveragePrice = (
 				<View style={styles.container}>
-					<View style={styles.averagePriceContainer}>
+					<View style={[styles.averagePriceContainer, styles.averagePriceContainerMain]}>
 						<Text style={styles.averagePriceCurrency}>$</Text>
 						<Text style={styles.averagePriceValue}>
 							{averagePrice}
 						</Text>
 					</View>
+
+					<View style={[styles.averagePriceContainer, styles.averagePriceContainerConverted]}>
+						<Text style={[styles.averagePriceValue, styles.convertedPrice]}>
+							{priceInEUR}
+						</Text>
+						<Text style={[styles.averagePriceCurrency, styles.convertedPrice]}> EUR</Text>
+
+						<Text style={styles.convertedPriceDelimiter}> / </Text>
+
+						<Text style={[styles.averagePriceValue, styles.convertedPrice]}>
+							{priceInUAH}
+						</Text>
+						<Text style={[styles.averagePriceCurrency, styles.convertedPrice]}> UAH</Text>
+
+					</View>
+
 					<Text style={styles.priceUnderline}>-</Text>
 					<Text style={styles.averagePriceDescription}>{price.description}</Text>
 				</View>
@@ -49,13 +71,18 @@ const styles = StyleSheet.create({
 	},
 	averagePriceContainer: {
 		flexDirection: 'row',
-		paddingTop: 5,
-		padding: 20,
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
+	averagePriceContainerMain: {
+		paddingTop: 5,
+	},
+	averagePriceContainerConverted: {
+		paddingBottom: 15
+	},
 	averagePriceCurrency: {
 		fontSize: 50,
+		paddingRight: 5,
 		color: '#7f8c8d'
 	},
 	averagePriceValue: {
@@ -65,7 +92,7 @@ const styles = StyleSheet.create({
 	priceUnderline: {
 		height: 2,
 		width: 140,
-		marginBottom: 20,
+		marginBottom: 10,
 		backgroundColor: '#2ecc71',
 		alignSelf: 'center'
 	},
@@ -75,6 +102,13 @@ const styles = StyleSheet.create({
 		color: '#bdc3c7',
 		paddingHorizontal: 10,
 		textAlign: 'center'
+	},
+	convertedPrice: {
+		fontSize: 16
+	},
+	convertedPriceDelimiter: {
+		fontSize: 16,
+		color: '#2ecc71'
 	},
 	loadingScreen: {
 		flex: 1,

@@ -44,6 +44,16 @@ export const fetchAveragePrice = () => {
 				});
 		});
 
+
+		const exchangeRatesPromise = new Promise((resolve, reject) => {
+			return fetch('https://auto.ria.com/demo/bu/finalPage/exchangeRates/')
+				.then(response => response.json())
+				.then(responseData => {
+					resolve(responseData);
+				});
+		});
+
+
 		const averagePricePromise = new Promise((resolve, reject) => {
 			return fetch(averagePriceApiRequest)
 				.then(response => response.json())
@@ -60,12 +70,17 @@ export const fetchAveragePrice = () => {
 		return Promise.all([
 			averagePricePromise,
 			descriptionPromise,
-			plotDataPromise
+			plotDataPromise,
+			exchangeRatesPromise
 		]).then(data => {
 			const averagePrice = {
 				value: data[0],
 				description: data[1],
-				plotData: data[2]
+				plotData: data[2],
+				exchangeRates: {
+					usd: data[3][0],
+					eur: data[3][1],
+				}
 			};
 
 			dispatch(receiveAveragePrice(averagePrice));

@@ -20,6 +20,7 @@ const receiveAveragePrice = (state, action) => {
 		average: action.averagePrice.value,
 		description: action.averagePrice.description,
 		plotData: action.averagePrice.plotData,
+		exchangeRates: action.averagePrice.exchangeRates,
 		lastUpdated: action.receivedAt
 	})
 };
