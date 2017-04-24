@@ -83,7 +83,7 @@ class TransportFilter extends Component {
 					<GearboxFilter/>
 					<FuelFilter/>
 
-					<View >
+					<View style={viewStyles.buttonWrapper}>
 						<TouchableOpacity
 							onPress={() => this.getAveragePrice()}
 							style={viewStyles.button}>

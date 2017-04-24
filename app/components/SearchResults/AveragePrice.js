@@ -13,17 +13,23 @@ export class AveragePrice extends Component {
 		if (price && price.average) {
 			const averagePrice = Math.round(price.average).toString();
 			AveragePrice = (
-				<View style={styles.averagePriceContainer}>
-					<Text style={styles.averagePriceValue}>
-						$ {averagePrice}
-					</Text>
+				<View style={styles.container}>
+					<View style={styles.averagePriceContainer}>
+						<Text style={styles.averagePriceCurrency}>$</Text>
+						<Text style={styles.averagePriceValue}>
+							{averagePrice}
+						</Text>
+					</View>
+					<Text style={styles.priceUnderline}>-</Text>
 					<Text style={styles.averagePriceDescription}>{price.description}</Text>
 				</View>
 			)
 		} else if (this.props.show && !price.isFetching && !price.average) {
 			AveragePrice = (
 				<View style={styles.averagePriceContainer}>
-					<Text style={styles.noResponse}>По указанным параметрам не найдено активных обьявлений</Text>
+					<Text style={styles.noResponse}>
+						По указанным параметрам не найдено активных обьявлений
+					</Text>
 				</View>
 			)
 		}
@@ -36,17 +42,30 @@ export class AveragePrice extends Component {
 }
 
 const styles = StyleSheet.create({
-	averagePriceContainer: {
+	container: {
 		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
+	},
+	averagePriceContainer: {
+		flexDirection: 'row',
 		paddingTop: 5,
 		padding: 20,
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	averagePriceCurrency: {
+		fontSize: 50,
+		color: '#7f8c8d'
 	},
 	averagePriceValue: {
-		flex: 2,
-		fontSize: 30,
+		fontSize: 60,
 		color: '#bdc3c7'
+	},
+	priceUnderline: {
+		height: 2,
+		width: 140,
+		marginBottom: 20,
+		backgroundColor: '#2ecc71',
+		alignSelf: 'center'
 	},
 	averagePriceDescription: {
 		flex: 3,

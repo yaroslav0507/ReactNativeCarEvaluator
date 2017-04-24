@@ -22,5 +22,8 @@ export const viewStyles = StyleSheet.create({
 		textAlign: 'center',
 		color: '#FFF',
 		fontWeight: '700'
+	},
+	buttonWrapper: {
+		height: 80
 	}
 });

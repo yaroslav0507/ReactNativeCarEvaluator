@@ -27,13 +27,6 @@ export class SearchResults extends Component {
       <View style={viewStyles.container}>
 				<AveragePrice price={price} show={!this.state.isFirstAttempt}/>
 
-				<TouchableOpacity
-					onPress={() => this.props.navigate('Filters')}
-					style={viewStyles.button}>
-
-					<Text style={viewStyles.buttonText}>Вернутся к фильтрам</Text>
-
-				</TouchableOpacity>
       </View>
     )
   }

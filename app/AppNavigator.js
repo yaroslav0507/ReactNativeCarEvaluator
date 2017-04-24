@@ -16,8 +16,10 @@ const AppNavigator = StackNavigator({
 			backgroundColor: globalStyles.colors.primaryBG
 		},
 		headerTitleStyle: {
-			color: '#FFF'
-		}
+			color: '#FFF',
+			textAlign: 'center'
+		},
+		headerTintColor: '#2ecc71'
 	}
 });
 
