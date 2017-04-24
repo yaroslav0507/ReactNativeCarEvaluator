@@ -5,19 +5,16 @@ import { TransportFilterContainer } from './components/TransportFilter/Transport
 import { SearchResultsContainer } from './components/SearchResults/SearchResultsContainer';
 import { globalStyles } from './styles/variables';
 
-
 const AppNavigator = StackNavigator({
 	Filters: { screen: TransportFilterContainer },
 	Results: { screen: SearchResultsContainer },
 }, {
 	navigationOptions: {
-		title: 'Фильтры',
 		headerStyle: {
 			backgroundColor: globalStyles.colors.primaryBG
 		},
 		headerTitleStyle: {
-			color: '#FFF',
-			textAlign: 'center'
+			color: '#FFF'
 		},
 		headerTintColor: '#2ecc71'
 	}

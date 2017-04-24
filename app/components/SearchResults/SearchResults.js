@@ -11,9 +11,6 @@ export class SearchResults extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {
-			isFirstAttempt: false
-		}
 	}
 
 	componentDidMount() {
@@ -25,8 +22,7 @@ export class SearchResults extends Component {
 
     return (
       <View style={viewStyles.container}>
-				<AveragePrice price={price} show={!this.state.isFirstAttempt}/>
-
+				<AveragePrice price={price}/>
       </View>
     )
   }

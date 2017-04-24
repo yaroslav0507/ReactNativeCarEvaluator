@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { ActivityIndicator, StyleSheet, View, Text } from 'react-native';
 
 export class AveragePrice extends Component {
 	constructor(props) {
@@ -35,8 +35,10 @@ export class AveragePrice extends Component {
 		}
 
     return price.isFetching ? (
-    	<View style={styles.averagePriceContainer}>
-				<Text style={styles.noResponse}>Загрузка...</Text>
+    	<View style={styles.loadingScreen}>
+				<ActivityIndicator
+					size="large"
+					color="#FFF"/>
 			</View>) : AveragePrice;
   }
 }
@@ -73,6 +75,10 @@ const styles = StyleSheet.create({
 		color: '#bdc3c7',
 		paddingHorizontal: 10,
 		textAlign: 'center'
+	},
+	loadingScreen: {
+		flex: 1,
+		justifyContent: 'center'
 	},
 	noResponse: {
 		color: '#FFF',

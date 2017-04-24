@@ -19,6 +19,7 @@ const receiveAveragePrice = (state, action) => {
 		isFetching: false,
 		average: action.averagePrice.value,
 		description: action.averagePrice.description,
+		plotData: action.averagePrice.plotData,
 		lastUpdated: action.receivedAt
 	})
 };
