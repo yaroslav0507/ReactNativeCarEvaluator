@@ -2,6 +2,10 @@
 
 Application that calculates the average price for any used car in Ukraine.
 
+## Interface
+![Main Screen](https://lh4.googleusercontent.com/zu9_FnkDX5r_A32jVnpDbeyODJ5eTJ9KVKPmdEPFQLTXQ7vki4BYdhrfYWlnD4O7Xq5Ghr-AoLSpnxE=w2220-h1734-rw)
+![Average Price Screen](https://lh5.googleusercontent.com/sbtbBxF5hg8eY-vRTKuQycScMqffMk-pTv6fJGuNLiuWnKGsWc_3L1FaG4XoeEp-6UZN4JvaoC2CCRQ=w2220-h1734-rw)
+
 ## Getting Started
 
 Clone the repository, install dependencies and start a react native server.
