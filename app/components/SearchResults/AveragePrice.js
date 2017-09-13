@@ -46,7 +46,7 @@ export class AveragePrice extends Component {
 					<Text style={styles.averagePriceDescription}>{price.description}</Text>
 				</View>
 			)
-		} else if (this.props.show && !price.isFetching && !price.average) {
+		} else if (!price.isFetching && !price.average) {
 			AveragePrice = (
 				<View style={styles.averagePriceContainer}>
 					<Text style={styles.noResponse}>
