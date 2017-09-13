@@ -3,8 +3,7 @@
 Application that calculates the average price for any used car in Ukraine.
 
 ## Interface
-![Main Screen](https://lh4.googleusercontent.com/zu9_FnkDX5r_A32jVnpDbeyODJ5eTJ9KVKPmdEPFQLTXQ7vki4BYdhrfYWlnD4O7Xq5Ghr-AoLSpnxE=w2220-h1734-rw)
-![Average Price Screen](https://lh5.googleusercontent.com/sbtbBxF5hg8eY-vRTKuQycScMqffMk-pTv6fJGuNLiuWnKGsWc_3L1FaG4XoeEp-6UZN4JvaoC2CCRQ=w2220-h1734-rw)
+![](https://lh4.googleusercontent.com/Iv04FwL_MpSS7FbAiSCvqj3aSzwz2G0HHreeJMGPkMc9SZsIjepNE2SQJtpmVjSU2mezF49XEJjJo8U=w2220-h1734-rw)
 
 ## Getting Started
 
